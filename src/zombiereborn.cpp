@@ -1186,17 +1186,16 @@ void ZR_InfectShake(CCSPlayerController *pController)
 	data.set_command(0);
 
 	pController->GetServerSideClient()->GetNetChannel()->SendNetMessage(pNetMsg, &data, BUF_RELIABLE);
-	pController->Respawn();
 }
 
 std::vector<SpawnPoint*> ZR_GetSpawns()
 {
-	CUtlVector<SpawnPoint*>* ctSpawns = g_pGameRules->m_CTSpawnPoints();
+	//CUtlVector<SpawnPoint*>* ctSpawns = g_pGameRules->m_CTSpawnPoints();
 	CUtlVector<SpawnPoint*>* tSpawns = g_pGameRules->m_TerroristSpawnPoints();
 	std::vector<SpawnPoint*> spawns;
 
-	FOR_EACH_VEC(*ctSpawns, i)
-		spawns.push_back((*ctSpawns)[i]);
+/*	FOR_EACH_VEC(*ctSpawns, i)
+		spawns.push_back((*ctSpawns)[i]);*/
 
 	FOR_EACH_VEC(*tSpawns, i)
 		spawns.push_back((*tSpawns)[i]);
@@ -1253,6 +1252,9 @@ void ZR_InfectMotherZombie(CCSPlayerController *pVictimController, std::vector<S
 
 
 
+	pVictimController->SwitchTeam(CS_TEAM_T);
+	pVictimPawn->EmitSound("zr.amb.scream");
+
 	// pick random spawn point
 	if (g_iInfectSpawnType == EZRSpawnType::RESPAWN)
 	{
@@ -1262,9 +1264,6 @@ void ZR_InfectMotherZombie(CCSPlayerController *pVictimController, std::vector<S
 
 		pVictimPawn->Teleport(&origin, &rotation, &vec3_origin);
 	}
-
-	pVictimController->SwitchTeam(CS_TEAM_T);
-	pVictimPawn->EmitSound("zr.amb.scream");
 
 	ZRZombieClass *pClass = g_pZRPlayerClassManager->GetZombieClass("MotherZombie");
 	if (pClass)
