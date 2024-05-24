@@ -655,6 +655,18 @@ ZRHumanClass* CZRPlayerClassManager::GetHumanClass(const char *pszClassName)
 	return m_HumanClassMap[index];
 }
 
+void ZR_StripAndGiveKnife(CCSPlayerPawn *pPawn)
+{
+	CCSPlayer_ItemServices *pItemServices = pPawn->m_pItemServices();
+
+	// it can sometimes be null when player joined on the very first round? 
+	if (!pItemServices)
+		return;
+
+	pPawn->DropMapWeapons();
+	pItemServices->StripPlayerWeapons();
+}
+
 void CZRPlayerClassManager::ApplyHumanClass(ZRHumanClass *pClass, CCSPlayerPawn *pPawn)
 {
 	ApplyBaseClass(pClass, pPawn);
@@ -680,6 +692,7 @@ void CZRPlayerClassManager::ApplyHumanClass(ZRHumanClass *pClass, CCSPlayerPawn 
 		});
 	}
 		ZR_StripAndGiveKnife(pPawn);
+		pPawn->EmitSound("zr.amb.scream");
 }
 
 void CZRPlayerClassManager::ApplyPreferredOrDefaultHumanClass(CCSPlayerPawn *pPawn)
@@ -1118,17 +1131,7 @@ void ZR_FakePlayerDeath(CCSPlayerController *pAttackerController, CCSPlayerContr
 	g_gameEventManager->FireEvent(pEvent, false);
 }
 
-void ZR_StripAndGiveKnife(CCSPlayerPawn *pPawn)
-{
-	CCSPlayer_ItemServices *pItemServices = pPawn->m_pItemServices();
 
-	// it can sometimes be null when player joined on the very first round? 
-	if (!pItemServices)
-		return;
-
-	pPawn->DropMapWeapons();
-	pItemServices->StripPlayerWeapons();
-}
 
 void ZR_Cure(CCSPlayerController *pTargetController)
 {
@@ -1224,7 +1227,7 @@ void ZR_Infect(CCSPlayerController *pAttackerController, CCSPlayerController *pV
 	// We disabled damage due to the delayed infection, restore
 	pVictimPawn->m_bTakesDamage(true);
 
-	pVictimPawn->EmitSound("zr.amb.scream");
+	
 	
 	g_pZRPlayerClassManager->ApplyPreferredOrDefaultZombieClass(pVictimPawn);
 
