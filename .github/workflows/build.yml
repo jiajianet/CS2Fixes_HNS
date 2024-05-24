@@ -6,6 +6,7 @@ on:
       - '*'
     branches:
       - main
+      - misc-dev
     paths-ignore:
     - LICENSE
     - README.md
