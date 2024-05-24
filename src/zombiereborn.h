@@ -28,7 +28,7 @@
 
 using ordered_json = nlohmann::ordered_json;
 
-#define ZR_PREFIX " \4[Zombie:Reborn]\1 "
+#define ZR_PREFIX " \4[CS2躲猫猫服]\1 "
 #define HUMAN_CLASS_KEY_NAME "zr_human_class"
 #define ZOMBIE_CLASS_KEY_NAME "zr_zombie_class"
 

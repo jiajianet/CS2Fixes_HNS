@@ -1008,7 +1008,7 @@ void SetupCTeams()
 
 void ZR_OnRoundStart(IGameEvent* pEvent)
 {
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "The game is \x05Humans vs. Zombies\x01, the goal for zombies is to infect all humans by knifing them.");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到CS2躲猫猫服务器, 服主: jiajia9000, 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
 	SetupRespawnToggler();
 	CZRRegenTimer::RemoveAllTimers();
 
@@ -1384,8 +1384,8 @@ void ZR_InitialInfection()
 	if (g_flRespawnDelay < 0.0f)
 		g_bRespawnEnabled = false;
 
-	ClientPrintAll(HUD_PRINTCENTER, "First infection has started!");
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "First infection has started! Good luck, survivors!");
+	ClientPrintAll(HUD_PRINTCENTER, "抓捕人选出,将在 60 秒后释放开始寻找.尽全力躲藏和逃亡吧! 祝你好运! ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "抓捕人选出,将在 60 秒后释放开始寻找.尽全力躲藏和逃亡吧! 祝你好运! ");
 	g_ZRRoundState = EZRRoundState::POST_INFECTION;
 }
 
@@ -1408,7 +1408,7 @@ void ZR_StartInitialCountdown()
 		if (g_iInfectionCountDown <= 60)
 		{
 			char message[256];
-			V_snprintf(message, sizeof(message), "First infection in \7%i %s\1!", g_iInfectionCountDown, g_iInfectionCountDown == 1 ? "second" : "seconds");
+			V_snprintf(message, sizeof(message), "即将在 \7%i %s\1!", g_iInfectionCountDown, g_iInfectionCountDown == 1 ? "second" : "秒后随机根据人数选出抓捕者. 回合即将开始, 请做好准备.");
 
 			ClientPrintAll(HUD_PRINTCENTER, message);
 			if (g_iInfectionCountDown % 5 == 0)
