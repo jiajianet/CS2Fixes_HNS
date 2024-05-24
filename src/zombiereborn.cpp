@@ -1384,8 +1384,8 @@ void ZR_InitialInfection()
 	if (g_flRespawnDelay < 0.0f)
 		g_bRespawnEnabled = false;
 
-	ClientPrintAll(HUD_PRINTCENTER, "抓捕人选出,将在 60 秒后释放开始寻找.尽全力躲藏和逃亡吧! 祝你好运! ");
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "抓捕人选出,将在 60 秒后释放开始寻找.尽全力躲藏和逃亡吧! 祝你好运! ");
+	ClientPrintAll(HUD_PRINTCENTER, "抓捕者已选出,将在 60 秒后释放开始寻找.尽全力躲藏和逃亡吧! 祝你好运! ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "抓捕者已选出,将在 60 秒后释放开始寻找.尽全力躲藏和逃亡吧! 祝你好运! ");
 	g_ZRRoundState = EZRRoundState::POST_INFECTION;
 }
 
