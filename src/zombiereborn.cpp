@@ -679,6 +679,7 @@ void CZRPlayerClassManager::ApplyHumanClass(ZRHumanClass *pClass, CCSPlayerPawn 
 			return -1.0f;
 		});
 	}
+		ZR_StripAndGiveKnife(pPawn);
 }
 
 void CZRPlayerClassManager::ApplyPreferredOrDefaultHumanClass(CCSPlayerPawn *pPawn)
@@ -874,6 +875,7 @@ void ZR_OnLevelInit()
 	new CTimer(0.02f, false, true, []()
 	{
 		// Here we force some cvars that are necessary for the gamemode
+		g_pEngineServer2->ServerCommand("mp_roundtime 20");
 		g_pEngineServer2->ServerCommand("mp_give_player_c4 0");
 		g_pEngineServer2->ServerCommand("mp_friendlyfire 0");
 		g_pEngineServer2->ServerCommand("bot_quota_mode fill"); // Necessary to fix bots kicked/joining infinitely when forced to CT https://github.com/Source2ZE/ZombieReborn/issues/64
@@ -1126,7 +1128,6 @@ void ZR_StripAndGiveKnife(CCSPlayerPawn *pPawn)
 
 	pPawn->DropMapWeapons();
 	pItemServices->StripPlayerWeapons();
-	pItemServices->GiveNamedItem("weapon_knife");
 }
 
 void ZR_Cure(CCSPlayerController *pTargetController)
@@ -1224,8 +1225,6 @@ void ZR_Infect(CCSPlayerController *pAttackerController, CCSPlayerController *pV
 	pVictimPawn->m_bTakesDamage(true);
 
 	pVictimPawn->EmitSound("zr.amb.scream");
-
-	ZR_StripAndGiveKnife(pVictimPawn);
 	
 	g_pZRPlayerClassManager->ApplyPreferredOrDefaultZombieClass(pVictimPawn);
 
@@ -1248,7 +1247,7 @@ void ZR_InfectMotherZombie(CCSPlayerController *pVictimController, std::vector<S
 	if (!pVictimPawn)
 		return;
 
-	ZR_StripAndGiveKnife(pVictimPawn);
+
 
 	// pick random spawn point
 	if (g_iInfectSpawnType == EZRSpawnType::RESPAWN)
