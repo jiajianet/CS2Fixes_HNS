@@ -1011,7 +1011,7 @@ void SetupCTeams()
 
 void ZR_OnRoundStart(IGameEvent* pEvent)
 {
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到 CS2躲猫猫服务器, 本服务器服主: jiajia9000. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用手中的武器躲避追捕吧! ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到 CS2躲猫猫服务器, 本服务器服主: jiajia9000. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
 	SetupRespawnToggler();
 	CZRRegenTimer::RemoveAllTimers();
 
