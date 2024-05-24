@@ -1411,7 +1411,7 @@ void ZR_StartInitialCountdown()
 		if (g_iInfectionCountDown <= 60)
 		{
 			char message[256];
-			V_snprintf(message, sizeof(message), "即将 \7%i %s\1!", g_iInfectionCountDown, g_iInfectionCountDown == 1 ? "second" : "秒后随机选出抓捕者并开始游戏");
+			V_snprintf(message, sizeof(message), "即将在 \7%i %s\1!", g_iInfectionCountDown, g_iInfectionCountDown == 1 ? "second" : " 秒后随机选出抓捕者并开始游戏");
 
 			ClientPrintAll(HUD_PRINTCENTER, message);
 			if (g_iInfectionCountDown % 5 == 0)
