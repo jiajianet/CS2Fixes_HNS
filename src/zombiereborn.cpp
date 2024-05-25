@@ -1027,7 +1027,8 @@ void SetupCTeams()
 
 void ZR_OnRoundStart(IGameEvent* pEvent)
 {
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到 CS2躲猫猫服务器, 本服务器服主: JiaJia. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "温馨提示: 服务器躲猫猫地图来自Steam创意工坊地图: infernohideandseek , 对于地图中出现的如开箱网站等广告请勿相信! 本服务器不对广告真实性和造成的损失负责! ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到 CS2躲猫猫服务器, 服务器服主: JiaJia. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
 	SetupRespawnToggler();
 	CZRRegenTimer::RemoveAllTimers();
 
@@ -1391,6 +1392,21 @@ void ZR_InitialInfection()
 		
 		pPlayer->SetImmunity(pPlayer->GetImmunity() - g_iMZImmunityReduction);
 
+		ClientPrint(pPlayer, HUD_PRINTCENTER, "你是\x04躲藏\x01的人");
+		ClientPrint(pPlayer, HUD_PRINTTALK, ZR_PREFIX "你是\x04躲藏\x01的人, 任务是 20 分钟内\x04不被抓捕的人找到\x01, 抓捕人将在 60 秒后解锁大门开始寻找, 尽全力躲藏和逃亡吧! 祝你好运! ");
+		
+	}
+	
+	for (int i = 0; i < gpGlobals->maxClients; i++)
+	{
+		ZEPlayer* pPlayer = g_playerManager->GetPlayer(i);
+		if (!pPlayer || !vecIsMZ[i])
+			continue;
+		
+		pPlayer->SetImmunity(pPlayer->GetImmunity() - g_iMZImmunityReduction);
+
+		ClientPrint(pPlayer, HUD_PRINTCENTER, "你是\x04抓捕\x01的人");
+		ClientPrint(pPlayer, HUD_PRINTTALK, ZR_PREFIX "你是\x04抓捕\x01的人, 任务是 20 分钟内\x04找到所有躲藏的人\x01, 60 秒后解锁大门方可开始寻找, 努力找到所有躲起来的人吧! 祝你好运! ");
 		
 	}
 
@@ -1413,8 +1429,6 @@ void ZR_InitialInfection()
 	if (g_flRespawnDelay < 0.0f)
 		g_bRespawnEnabled = false;
 
-
-	ClientPrintAll(HUD_PRINTCENTER, "抓捕者已选出, 将在 60 秒后开始寻找. 尽全力躲藏和逃亡吧! 祝你好运!! ");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "抓捕者已选出, 将在 60 秒后开始寻找. 尽全力躲藏和逃亡吧! 祝你好运!! ");
 	g_ZRRoundState = EZRRoundState::POST_INFECTION;
 }
