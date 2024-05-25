@@ -1405,9 +1405,9 @@ void ZR_InitialInfection()
 			continue;
 		ZRHumanClass *pClass = g_pZRPlayerClassManager->GetHumanClass("HumanClass3");
 		if (pClass)
-			g_pZRPlayerClassManager->ApplyZombieClass(pClass, pPawn);
+			g_pZRPlayerClassManager->ApplyHumanClass(pClass, pPawn);
 		else
-			g_pZRPlayerClassManager->ApplyPreferredOrDefaultZombieClass(pPawn);
+			g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);
 	}
 
 	if (g_flRespawnDelay < 0.0f)
