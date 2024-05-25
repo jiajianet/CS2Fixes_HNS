@@ -1416,7 +1416,7 @@ void ZR_InitialInfection()
 	for (int i = 0; i < gpGlobals->maxClients; i++)
 	{
 		CCSPlayerController* pController = CCSPlayerController::FromSlot(i);
-		if (!pController || !pController->IsConnected() || pController->m_iTeamNum() = CS_TEAM_CT)
+		if (!pController || !pController->IsConnected() || pController->m_iTeamNum() == CS_TEAM_CT)
 			continue;
 
 		ClientPrint(pController, HUD_PRINTCENTER, "你是\x04抓捕\x01的人");
