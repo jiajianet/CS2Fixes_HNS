@@ -665,6 +665,7 @@ void ZR_StripAndGiveKnife(CCSPlayerPawn *pPawn)
 
 	pPawn->DropMapWeapons();
 	pItemServices->StripPlayerWeapons();
+	pItemServices->GiveNamedItem("weapon_knife");
 }
 
 void CZRPlayerClassManager::ApplyHumanClass(ZRHumanClass *pClass, CCSPlayerPawn *pPawn)

@@ -3,7 +3,7 @@
 		"HumanClass1": {
 			// class behaviour, values will not be inherited from base class
 			"enabled": true,
-			"team_default": true,
+			"team_default": false,
 			
 			// player behaviour
 			// all player attributes are required if it doesn't have a base class
@@ -25,7 +25,7 @@
 		},
 		"HumanClass2": {
 			"enabled": true,
-			"team_default": true,
+			"team_default": false,
 			"base": "HumanClass1", // optional. missing keys will be inherited from base class
 			"models": [ // model entry keys will override base class model entry keys only if both have 1 model entry
 				{
