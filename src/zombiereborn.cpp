@@ -1343,8 +1343,8 @@ void ZR_InitialInfection()
 		}
 
 		// a list of player who survived the previous mz roll of this round
-		CUtlVector<CCSPlayerController*> pSurvivorControllers;
-		CCSPlayerPawn *pTargetPawnSurvivors = (CCSPlayerPawn*)pSurvivorControllers->GetPawn();
+		CCSPlayerController* pSurController = (CCSPlayerController*)pSurvivorControllers;
+		CCSPlayerPawn *pTargetPawnSurvivors = (CCSPlayerPawn*)pSurController->GetPawn();
 		g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pTargetPawnSurvivors);
 		FOR_EACH_VEC(pCandidateControllers, i)
 		{
