@@ -1392,7 +1392,7 @@ void ZR_InitialInfection()
 		
 		pPlayer->SetImmunity(pPlayer->GetImmunity() - g_iMZImmunityReduction);
 
-		char* tPlayer = g_playerManager->GetPlayer(i);
+		CBasePlayerController* tPlayer = g_playerManager->GetPlayer(i);
 		ClientPrint(tPlayer, HUD_PRINTCENTER, "你是\x04躲藏\x01的人");
 		ClientPrint(tPlayer, HUD_PRINTTALK, ZR_PREFIX "你是\x04躲藏\x01的人, 任务是 20 分钟内\x04不被抓捕的人找到\x01, 抓捕人将在 60 秒后解锁大门开始寻找, 尽全力躲藏和逃亡吧! 祝你好运! ");
 		
@@ -1406,7 +1406,7 @@ void ZR_InitialInfection()
 		
 		pPlayer->SetImmunity(pPlayer->GetImmunity() - g_iMZImmunityReduction);
 
-		char* tPlayer = g_playerManager->GetPlayer(i);
+		CBasePlayerController* tPlayer = g_playerManager->GetPlayer(i);
 		ClientPrint(tPlayer, HUD_PRINTCENTER, "你是\x04抓捕\x01的人");
 		ClientPrint(tPlayer, HUD_PRINTTALK, ZR_PREFIX "你是\x04抓捕\x01的人, 任务是 20 分钟内\x04找到所有躲藏的人\x01, 60 秒后解锁大门方可开始寻找, 努力找到所有躲起来的人吧! 祝你好运! ");
 		
