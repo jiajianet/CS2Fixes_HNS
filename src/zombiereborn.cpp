@@ -1344,9 +1344,7 @@ void ZR_InitialInfection()
 
 		// a list of player who survived the previous mz roll of this round
 		CUtlVector<CCSPlayerController*> pSurvivorControllers;
-		CCSPlayerController* pSurController = (CCSPlayerController*)pSurvivorControllers;
-		CCSPlayerPawn *pTargetPawnSurvivors = (CCSPlayerPawn*)pSurController->GetPawn();
-		g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pTargetPawn);
+
 		FOR_EACH_VEC(pCandidateControllers, i)
 		{
 			// don't even bother with picked mz or player with 100 immunity
@@ -1395,6 +1393,10 @@ void ZR_InitialInfection()
 
 	if (g_flRespawnDelay < 0.0f)
 		g_bRespawnEnabled = false;
+
+	pController->SwitchTeam(CS_TEAM_CT);
+	CCSPlayerPawn *pTargetPawnSurvivors = (CCSPlayerPawn*)pController->GetPawn();
+	g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pTargetPawnSurvivors);
 
 	ClientPrintAll(HUD_PRINTCENTER, "抓捕者已选出, 将在 60 秒后开始寻找. 尽全力躲藏和逃亡吧! 祝你好运!! ");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "抓捕者已选出, 将在 60 秒后开始寻找. 尽全力躲藏和逃亡吧! 祝你好运!! ");
