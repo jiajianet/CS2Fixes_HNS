@@ -1397,27 +1397,17 @@ void ZR_InitialInfection()
 		ClientPrint(tPlayer, HUD_PRINTTALK, ZR_PREFIX "你是\x04躲藏\x01的人, 任务是 20 分钟内\x04不被抓捕的人找到\x01, 抓捕人将在 60 秒后解锁大门开始寻找, 尽全力躲藏和逃亡吧! 祝你好运! ");
 		
 	}
-	
-	for (int i = 0; i < gpGlobals->maxClients; i++)
-	{
-		ZEPlayer* pPlayer = g_playerManager->GetPlayer(i);
-		if (!pPlayer || !vecIsMZ[i])
-			continue;
-		
-		pPlayer->SetImmunity(pPlayer->GetImmunity() - g_iMZImmunityReduction);
 
-		CBasePlayerController* tPlayer = g_playerManager->GetPlayer(i);
-		ClientPrint(tPlayer, HUD_PRINTCENTER, "你是\x04抓捕\x01的人");
-		ClientPrint(tPlayer, HUD_PRINTTALK, ZR_PREFIX "你是\x04抓捕\x01的人, 任务是 20 分钟内\x04找到所有躲藏的人\x01, 60 秒后解锁大门方可开始寻找, 努力找到所有躲起来的人吧! 祝你好运! ");
-		
-	}
 
 	for (int i = 0; i < gpGlobals->maxClients; i++)
 	{
 		CCSPlayerController* pController = CCSPlayerController::FromSlot(i);
 		if (!pController || !pController->IsConnected() || pController->m_iTeamNum() != CS_TEAM_CT)
 			continue;
-
+		
+		ClientPrint(pController, HUD_PRINTCENTER, "你是\x04躲藏\x01的人");
+		ClientPrint(pController, HUD_PRINTTALK, ZR_PREFIX "你是\x04躲藏\x01的人, 任务是 20 分钟内\x04不被抓捕的人找到\x01, 抓捕人将在 60 秒后解锁大门开始寻找, 尽全力躲藏和逃亡吧! 祝你好运! ");
+		
 		CCSPlayerPawn* pPawn = (CCSPlayerPawn*)pController->GetPawn();
 		if (!pPawn || !pPawn->IsAlive())
 			continue;
@@ -1426,6 +1416,17 @@ void ZR_InitialInfection()
 			g_pZRPlayerClassManager->ApplyHumanClass(pClass, pPawn);
 		else
 			g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);
+	}
+
+	for (int i = 0; i < gpGlobals->maxClients; i++)
+	{
+		CCSPlayerController* pController = CCSPlayerController::FromSlot(i);
+		if (!pController || !pController->IsConnected() || pController->m_iTeamNum() = CS_TEAM_CT)
+			continue;
+
+		ClientPrint(pController, HUD_PRINTCENTER, "你是\x04抓捕\x01的人");
+		ClientPrint(pController, HUD_PRINTTALK, ZR_PREFIX "你是\x04抓捕\x01的人, 任务是 20 分钟内\x04找到所有躲藏的人\x01, 60 秒后解锁大门方可开始寻找, 努力找到所有躲起来的人吧! 祝你好运! ");
+		
 	}
 
 	if (g_flRespawnDelay < 0.0f)
