@@ -1402,7 +1402,7 @@ void ZR_InitialInfection()
 		CCSPlayerPawn* pPawn = (CCSPlayerPawn*)pController->GetPawn();
 		if (!pPawn || !pPawn->IsAlive())
 			continue;
-		g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);
+		ApplyBaseClassVisuals((ZRClass *)humanClass, pPawn);
 	}
 
 	if (g_flRespawnDelay < 0.0f)
