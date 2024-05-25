@@ -1389,8 +1389,20 @@ void ZR_InitialInfection()
 			continue;
 		
 		pPlayer->SetImmunity(pPlayer->GetImmunity() - g_iMZImmunityReduction);
-		CCSPlayerPawn *pTargetPawnSurvivors = (CCSPlayerPawn*)pPlayer->GetPawn();
-		g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pTargetPawnSurvivors);
+
+		
+	}
+
+	for (int i = 0; i < gpGlobals->maxClients; i++)
+	{
+		CCSPlayerController* pController = CCSPlayerController::FromSlot(i);
+		if (!pController || !pController->IsConnected() || pController->m_iTeamNum() != CS_TEAM_CT)
+			continue;
+
+		CCSPlayerPawn* pPawn = (CCSPlayerPawn*)pController->GetPawn();
+		if (!pPawn || !pPawn->IsAlive())
+			continue;
+		g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);
 	}
 
 	if (g_flRespawnDelay < 0.0f)
