@@ -903,6 +903,7 @@ void ZR_OnLevelInit()
 		g_pEngineServer2->ServerCommand("sv_cheats true");
 		g_pEngineServer2->ServerCommand("noclip off");
 
+
 		return -1.0f;
 	});
 
@@ -1405,9 +1406,7 @@ void ZR_InitialInfection()
 		
 		ClientPrint(pController, HUD_PRINTCENTER, "你是\x04躲藏\x01的人");
 		ClientPrint(pController, HUD_PRINTTALK, ZR_PREFIX "你是\x04躲藏\x01的人, 任务是 20 分钟内\x04不被抓捕的人找到\x01, 抓捕人将在 60 秒后解锁大门开始寻找, 尽全力躲藏和逃亡吧! 祝你好运! ");
-		
-		pController->Command("thirdperson");
-
+		g_pEngineServer2->ServerCommand("thirdperson");
 		CCSPlayerPawn* pPawn = (CCSPlayerPawn*)pController->GetPawn();
 		pPawn->EmitSound("zr.amb.scream");
 		if (!pPawn || !pPawn->IsAlive())
