@@ -1212,6 +1212,8 @@ void ZR_Infect(CCSPlayerController *pAttackerController, CCSPlayerController *pV
 	if (!pVictimController)
 		return;
 
+	CUtlVector<CCSPlayerController*> pSurvivorControllers;
+
 	if (pVictimController->m_iTeamNum() == CS_TEAM_CT)
 		pVictimController->SwitchTeam(CS_TEAM_T);
 
@@ -1226,11 +1228,11 @@ void ZR_Infect(CCSPlayerController *pAttackerController, CCSPlayerController *pV
 
 	// We disabled damage due to the delayed infection, restore
 	pVictimPawn->m_bTakesDamage(true);
+	
 
-	CCSPlayerPawn *pTargetPawn = (CCSPlayerPawn*)pSurvivorControllers->GetPawn();
 	
 	g_pZRPlayerClassManager->ApplyPreferredOrDefaultZombieClass(pVictimPawn);
-	g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pTargetPawn);
+
 
 	ZR_InfectShake(pVictimController);
 
@@ -1342,6 +1344,8 @@ void ZR_InitialInfection()
 
 		// a list of player who survived the previous mz roll of this round
 		CUtlVector<CCSPlayerController*> pSurvivorControllers;
+		CCSPlayerPawn *pTargetPawnSurvivors = (CCSPlayerPawn*)pSurvivorControllers->GetPawn();
+		g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pTargetPawnSurvivors);
 		FOR_EACH_VEC(pCandidateControllers, i)
 		{
 			// don't even bother with picked mz or player with 100 immunity
@@ -1375,6 +1379,7 @@ void ZR_InitialInfection()
 			iMZToInfect--;
 		}
 		iFailSafeCounter++;
+
 	}
 
 	// reduce everyone's immunity except mz
