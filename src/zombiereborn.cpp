@@ -735,7 +735,8 @@ void CZRPlayerClassManager::ApplyPreferredOrDefaultHumanClassVisuals(CCSPlayerPa
 		humanClass = m_HumanClassMap[index];
 	} else if (m_vecHumanDefaultClass.Count()) {
 		humanClass = m_vecHumanDefaultClass[rand() % m_vecHumanDefaultClass.Count()];
-	} else if (!humanClass) {
+	}
+	if (!humanClass) {
 		Warning("Missing default human class or valid preferences!\n");
 		return;
 	}
@@ -1402,7 +1403,11 @@ void ZR_InitialInfection()
 		CCSPlayerPawn* pPawn = (CCSPlayerPawn*)pController->GetPawn();
 		if (!pPawn || !pPawn->IsAlive())
 			continue;
-		ApplyBaseClassVisuals((ZRClass *)humanClass, pPawn);
+		ZRHumanClass *pClass = g_pZRPlayerClassManager->GetHumanClass("HumanClass3");
+		if (pClass)
+			g_pZRPlayerClassManager->ApplyZombieClass(pClass, pPawn);
+		else
+			g_pZRPlayerClassManager->ApplyPreferredOrDefaultZombieClass(pPawn);
 	}
 
 	if (g_flRespawnDelay < 0.0f)
