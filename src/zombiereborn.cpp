@@ -1026,7 +1026,7 @@ void SetupCTeams()
 
 void ZR_OnRoundStart(IGameEvent* pEvent)
 {
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到 CS2躲猫猫服务器, 本服务器服主: jiajia9000. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到 CS2躲猫猫服务器, 本服务器服主: JiaJia. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
 	SetupRespawnToggler();
 	CZRRegenTimer::RemoveAllTimers();
 
@@ -1227,9 +1227,10 @@ void ZR_Infect(CCSPlayerController *pAttackerController, CCSPlayerController *pV
 	// We disabled damage due to the delayed infection, restore
 	pVictimPawn->m_bTakesDamage(true);
 
-	
+	CCSPlayerPawn *pTargetPawn = (CCSPlayerPawn*)pAttackerController->GetPawn();
 	
 	g_pZRPlayerClassManager->ApplyPreferredOrDefaultZombieClass(pVictimPawn);
+	g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pTargetPawn);
 
 	ZR_InfectShake(pVictimController);
 
