@@ -693,7 +693,7 @@ void CZRPlayerClassManager::ApplyHumanClass(ZRHumanClass *pClass, CCSPlayerPawn 
 		});
 	}
 		ZR_StripAndGiveKnife(pPawn);
-		pPawn->EmitSound("zr.amb.scream");
+
 }
 
 void CZRPlayerClassManager::ApplyPreferredOrDefaultHumanClass(CCSPlayerPawn *pPawn)
@@ -1259,7 +1259,6 @@ void ZR_InfectMotherZombie(CCSPlayerController *pVictimController, std::vector<S
 
 
 	pVictimController->SwitchTeam(CS_TEAM_T);
-	pVictimPawn->EmitSound("zr.amb.scream");
 
 	// pick random spawn point
 	if (g_iInfectSpawnType == EZRSpawnType::RESPAWN)
@@ -1405,6 +1404,7 @@ void ZR_InitialInfection()
 		ClientPrint(pController, HUD_PRINTTALK, ZR_PREFIX "你是\x04躲藏\x01的人, 任务是 20 分钟内\x04不被抓捕的人找到\x01, 抓捕人将在 60 秒后解锁大门开始寻找, 尽全力躲藏和逃亡吧! 祝你好运! ");
 		
 		CCSPlayerPawn* pPawn = (CCSPlayerPawn*)pController->GetPawn();
+		pPawn->EmitSound("zr.amb.scream");
 		if (!pPawn || !pPawn->IsAlive())
 			continue;
 		ZRHumanClass *pClass = g_pZRPlayerClassManager->GetHumanClass("HumanClass3");
