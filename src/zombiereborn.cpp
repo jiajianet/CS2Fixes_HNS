@@ -1227,7 +1227,6 @@ void ZR_Infect(CCSPlayerController *pAttackerController, CCSPlayerController *pV
 	// We disabled damage due to the delayed infection, restore
 	pVictimPawn->m_bTakesDamage(true);
 
-	CUtlVector<CCSPlayerController*> pSurvivorControllers;
 	CCSPlayerPawn *pTargetPawn = (CCSPlayerPawn*)pSurvivorControllers->GetPawn();
 	
 	g_pZRPlayerClassManager->ApplyPreferredOrDefaultZombieClass(pVictimPawn);
