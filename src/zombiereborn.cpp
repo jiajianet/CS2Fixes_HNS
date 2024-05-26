@@ -910,6 +910,8 @@ void ZR_OnLevelInit()
 		g_pEngineServer2->ServerCommand("sv_alltalk 0");
 		g_pEngineServer2->ServerCommand("mp_free_armor 2");
 		g_pEngineServer2->ServerCommand("ammo_grenade_limit_total 6");
+		g_pEngineServer2->ServerCommand("sv_party_mode 1");
+		
 		
 
 		return -1.0f;
@@ -1490,8 +1492,13 @@ bool ZR_Hook_OnTakeDamage_Alive(CTakeDamageInfo *pInfo, CCSPlayerPawn *pVictimPa
 	const char *pszAbilityClass = pInfo->m_hAbility.Get() ? pInfo->m_hAbility.Get()->GetClassname() : "";
 	if (pAttackerPawn->m_iTeamNum() == CS_TEAM_T && pVictimPawn->m_iTeamNum() == CS_TEAM_CT)
 	{
-		ZR_Infect(pAttackerController, pVictimController, false);
-		return true; // nullify the damage
+		if(V_strncmp(pszAbilityClass, "hegrenade", 12)){
+			return true;
+		}else{
+			ZR_Infect(pAttackerController, pVictimController, false);
+			return true; // nullify the damage
+		}
+
 	}
 
 	if (g_iGroanChance && pVictimPawn->m_iTeamNum() == CS_TEAM_T && (rand() % g_iGroanChance) == 1)
@@ -1643,16 +1650,24 @@ void ZR_OnPlayerDeath(IGameEvent* pEvent)
 	if (pVictimPawn->m_iTeamNum() == CS_TEAM_T && g_ZRRoundState == EZRRoundState::POST_INFECTION)
 		pVictimPawn->EmitSound("zr.amb.zombie_die");
 
-	// respawn player
+		
+	if (pVictimController->m_iTeamNum() == CS_TEAM_CT)
+		pVictimController->SwitchTeam(CS_TEAM_T);
+
+// respawn player
 	CHandle<CCSPlayerController> handle = pVictimController->GetHandle();
 	new CTimer(g_flRespawnDelay < 0.0f ? 2.0f : g_flRespawnDelay, false, false, [handle]()
 	{
 		CCSPlayerController* pController = (CCSPlayerController*)handle.Get();
-		if (!pController || !g_bRespawnEnabled || pController->m_iTeamNum < CS_TEAM_T)
+		if (!pController || !g_bRespawnEnabled)
 			return -1.0f;
 		pController->Respawn();
 		return -1.0f;
 	});
+		// This can be null if the victim disconnected right before getting hit AND someone joined in their place immediately, thus replacing the controller
+	if (!pVictimController)
+		return;
+
 }
 
 void ZR_OnRoundFreezeEnd(IGameEvent* pEvent)
