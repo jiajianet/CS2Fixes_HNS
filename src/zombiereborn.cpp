@@ -896,14 +896,14 @@ void ZR_OnLevelInit()
 		g_pEngineServer2->ServerCommand("bot_quota_mode fill"); // Necessary to fix bots kicked/joining infinitely when forced to CT https://github.com/Source2ZE/ZombieReborn/issues/64
 		g_pEngineServer2->ServerCommand("mp_ignore_round_win_conditions 1");
 		// These disable most of the buy menu for zombies
-		g_pEngineServer2->ServerCommand("mp_weapons_allow_pistols 3");
-		g_pEngineServer2->ServerCommand("mp_weapons_allow_smgs 3");
-		g_pEngineServer2->ServerCommand("mp_weapons_allow_heavy 3");
-		g_pEngineServer2->ServerCommand("mp_weapons_allow_rifles 3");
+		g_pEngineServer2->ServerCommand("mp_weapons_allow_pistols 1");
+		g_pEngineServer2->ServerCommand("mp_weapons_allow_smgs 1");
+		g_pEngineServer2->ServerCommand("mp_weapons_allow_heavy 1");
+		g_pEngineServer2->ServerCommand("mp_weapons_allow_rifles 1");
 		g_pEngineServer2->ServerCommand("sv_cheats true");
 		g_pEngineServer2->ServerCommand("noclip off");
 		g_pEngineServer2->ServerCommand("sv_autobunnyhopping 0");
-		g_pEngineServer2->ServerCommand("sv_noclipspeed 1");
+		g_pEngineServer2->ServerCommand("sv_noclipspeed 0.000001");
 		g_pEngineServer2->ServerCommand("mp_autokick 0");
 		g_pEngineServer2->ServerCommand("mp_solid_teammates 1");
 		g_pEngineServer2->ServerCommand("mp_autoteambalance 0");
@@ -1536,8 +1536,8 @@ bool ZR_Detour_CCSPlayer_WeaponServices_CanUse(CCSPlayer_WeaponServices *pWeapon
 	const char *pszWeaponClassname = pPlayerWeapon->GetClassname();
 	if (pPawn->m_iTeamNum() == CS_TEAM_CT && V_strncmp(pszWeaponClassname, "weapon_knife", 12))
 		return false;
-	if (pPawn->m_iTeamNum() == CS_TEAM_T && V_strlen(pszWeaponClassname) > 7 && !g_pZRWeaponConfig->FindWeapon(pszWeaponClassname + 7))
-		return false;
+	/*if (pPawn->m_iTeamNum() == CS_TEAM_CT && V_strlen(pszWeaponClassname) > 7 && !g_pZRWeaponConfig->FindWeapon(pszWeaponClassname + 7))
+		return false;*/
 	// doesn't guarantee the player will pick the weapon up, it just allows the original function to run
 	return true;
 }
