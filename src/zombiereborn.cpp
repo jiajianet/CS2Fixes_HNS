@@ -1634,9 +1634,9 @@ void ZR_OnPlayerHurt(IGameEvent* pEvent)
 	if (pAttackerController->m_iTeamNum() == CS_TEAM_CT && pVictimController->m_iTeamNum() == CS_TEAM_T)
 		ZR_ApplyKnockback((CCSPlayerPawn*)pAttackerController->GetPawn(), (CCSPlayerPawn*)pVictimController->GetPawn(), iDmgHealth, szWeapon);
 }
-
+/*
 void ZR_OnPlayerDeath(IGameEvent* pEvent)
-{/*
+{
 	// fake player_death, don't need to respawn or check win condition
 	if (pEvent->GetBool("infected"))
 		return;
@@ -1649,13 +1649,6 @@ void ZR_OnPlayerDeath(IGameEvent* pEvent)
 		return;
 
 	ZR_CheckTeamWinConditions(pVictimPawn->m_iTeamNum() == CS_TEAM_T ? CS_TEAM_CT : CS_TEAM_T);
-
-	if (pVictimPawn->m_iTeamNum() == CS_TEAM_T && g_ZRRoundState == EZRRoundState::POST_INFECTION)
-		pVictimPawn->EmitSound("zr.amb.zombie_die");
-
-		
-	if (pVictimController->m_iTeamNum() == CS_TEAM_CT)
-		pVictimController->SwitchTeam(CS_TEAM_T);
 
 // respawn player
 	CHandle<CCSPlayerController> handle = pVictimController->GetHandle();
@@ -1670,10 +1663,9 @@ void ZR_OnPlayerDeath(IGameEvent* pEvent)
 		// This can be null if the victim disconnected right before getting hit AND someone joined in their place immediately, thus replacing the controller
 	if (!pVictimController)
 		return;
-*/
-	return;
-}
 
+}
+*/
 void ZR_OnRoundFreezeEnd(IGameEvent* pEvent)
 {
 	ZR_StartInitialCountdown();
