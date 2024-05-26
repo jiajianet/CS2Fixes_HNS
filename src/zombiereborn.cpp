@@ -903,7 +903,7 @@ void ZR_OnLevelInit()
 		g_pEngineServer2->ServerCommand("sv_cheats true");
 		g_pEngineServer2->ServerCommand("noclip off");
 		g_pEngineServer2->ServerCommand("sv_autobunnyhopping 0");
-		g_pEngineServer2->ServerCommand("sv_noclipspeed 0.000001");
+		g_pEngineServer2->ServerCommand("sv_noclipspeed 1");
 		g_pEngineServer2->ServerCommand("mp_autokick 0");
 		g_pEngineServer2->ServerCommand("mp_solid_teammates 1");
 		g_pEngineServer2->ServerCommand("mp_autoteambalance 0");
