@@ -655,6 +655,19 @@ ZRHumanClass* CZRPlayerClassManager::GetHumanClass(const char *pszClassName)
 	return m_HumanClassMap[index];
 }
 
+void ZR_StripAndGiveKnife(CCSPlayerPawn *pPawn)
+{
+	CCSPlayer_ItemServices *pItemServices = pPawn->m_pItemServices();
+
+	// it can sometimes be null when player joined on the very first round? 
+	if (!pItemServices)
+		return;
+
+	pPawn->DropMapWeapons();
+	pItemServices->StripPlayerWeapons();
+	pItemServices->GiveNamedItem("weapon_knife");
+}
+
 void CZRPlayerClassManager::ApplyHumanClass(ZRHumanClass *pClass, CCSPlayerPawn *pPawn)
 {
 	ApplyBaseClass(pClass, pPawn);
@@ -679,6 +692,8 @@ void CZRPlayerClassManager::ApplyHumanClass(ZRHumanClass *pClass, CCSPlayerPawn 
 			return -1.0f;
 		});
 	}
+		ZR_StripAndGiveKnife(pPawn);
+
 }
 
 void CZRPlayerClassManager::ApplyPreferredOrDefaultHumanClass(CCSPlayerPawn *pPawn)
@@ -721,7 +736,8 @@ void CZRPlayerClassManager::ApplyPreferredOrDefaultHumanClassVisuals(CCSPlayerPa
 		humanClass = m_HumanClassMap[index];
 	} else if (m_vecHumanDefaultClass.Count()) {
 		humanClass = m_vecHumanDefaultClass[rand() % m_vecHumanDefaultClass.Count()];
-	} else if (!humanClass) {
+	}
+	if (!humanClass) {
 		Warning("Missing default human class or valid preferences!\n");
 		return;
 	}
@@ -874,15 +890,29 @@ void ZR_OnLevelInit()
 	new CTimer(0.02f, false, true, []()
 	{
 		// Here we force some cvars that are necessary for the gamemode
+		g_pEngineServer2->ServerCommand("mp_roundtime 20");
 		g_pEngineServer2->ServerCommand("mp_give_player_c4 0");
 		g_pEngineServer2->ServerCommand("mp_friendlyfire 0");
 		g_pEngineServer2->ServerCommand("bot_quota_mode fill"); // Necessary to fix bots kicked/joining infinitely when forced to CT https://github.com/Source2ZE/ZombieReborn/issues/64
 		g_pEngineServer2->ServerCommand("mp_ignore_round_win_conditions 1");
 		// These disable most of the buy menu for zombies
-		g_pEngineServer2->ServerCommand("mp_weapons_allow_pistols 3");
-		g_pEngineServer2->ServerCommand("mp_weapons_allow_smgs 3");
-		g_pEngineServer2->ServerCommand("mp_weapons_allow_heavy 3");
-		g_pEngineServer2->ServerCommand("mp_weapons_allow_rifles 3");
+		g_pEngineServer2->ServerCommand("sv_cheats true");
+		g_pEngineServer2->ServerCommand("noclip off");
+		g_pEngineServer2->ServerCommand("sv_autobunnyhopping 0");
+		g_pEngineServer2->ServerCommand("sv_noclipspeed 0.000001");
+		g_pEngineServer2->ServerCommand("mp_autokick 0");
+		g_pEngineServer2->ServerCommand("mp_solid_teammates 1");
+		g_pEngineServer2->ServerCommand("mp_autoteambalance 0");
+		g_pEngineServer2->ServerCommand("mp_buy_anywhere 1");
+		g_pEngineServer2->ServerCommand("mp_buytime 9999");
+		g_pEngineServer2->ServerCommand("mp_startmoney 700");
+		g_pEngineServer2->ServerCommand("mp_maxmoney 5000");
+		g_pEngineServer2->ServerCommand("sv_alltalk 0");
+		g_pEngineServer2->ServerCommand("mp_free_armor 2");
+		g_pEngineServer2->ServerCommand("ammo_grenade_limit_total 6");
+		g_pEngineServer2->ServerCommand("sv_party_mode 1");
+		
+		
 
 		return -1.0f;
 	});
@@ -1011,7 +1041,10 @@ void SetupCTeams()
 
 void ZR_OnRoundStart(IGameEvent* pEvent)
 {
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到CS2躲猫猫服务器, 服主: jiajia9000, 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "温馨提示: 服务器躲猫猫地图来自Steam创意工坊地图: infernohideandseek , 对于地图中出现的如开箱网站等广告请勿相信! \x04 本服务器不对广告真实性和造成的损失负责!\x01 ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到\x04 CS2躲猫猫服务器\x01, 服务器服主:\x04 JiaJia\x01. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "服务器版本:\x04 V1.0.1 \x01 更新时间: 2024/05/26");
+
 	SetupRespawnToggler();
 	CZRRegenTimer::RemoveAllTimers();
 
@@ -1050,6 +1083,8 @@ void ZR_OnPlayerSpawn(IGameEvent* pEvent)
 	else
 	{
 		pController->SwitchTeam(CS_TEAM_CT);
+		CCSPlayerPawn *pPawn = (CCSPlayerPawn*)pController->GetPawn();
+		ZR_StripAndGiveKnife(pPawn);
 	}
 
 	CHandle<CCSPlayerController> handle = pController->GetHandle();
@@ -1116,18 +1151,7 @@ void ZR_FakePlayerDeath(CCSPlayerController *pAttackerController, CCSPlayerContr
 	g_gameEventManager->FireEvent(pEvent, false);
 }
 
-void ZR_StripAndGiveKnife(CCSPlayerPawn *pPawn)
-{
-	CCSPlayer_ItemServices *pItemServices = pPawn->m_pItemServices();
 
-	// it can sometimes be null when player joined on the very first round? 
-	if (!pItemServices)
-		return;
-
-	pPawn->DropMapWeapons();
-	pItemServices->StripPlayerWeapons();
-	pItemServices->GiveNamedItem("weapon_knife");
-}
 
 void ZR_Cure(CCSPlayerController *pTargetController)
 {
@@ -1186,12 +1210,12 @@ void ZR_InfectShake(CCSPlayerController *pController)
 
 std::vector<SpawnPoint*> ZR_GetSpawns()
 {
-	CUtlVector<SpawnPoint*>* ctSpawns = g_pGameRules->m_CTSpawnPoints();
+	//CUtlVector<SpawnPoint*>* ctSpawns = g_pGameRules->m_CTSpawnPoints();
 	CUtlVector<SpawnPoint*>* tSpawns = g_pGameRules->m_TerroristSpawnPoints();
 	std::vector<SpawnPoint*> spawns;
 
-	FOR_EACH_VEC(*ctSpawns, i)
-		spawns.push_back((*ctSpawns)[i]);
+/*	FOR_EACH_VEC(*ctSpawns, i)
+		spawns.push_back((*ctSpawns)[i]);*/
 
 	FOR_EACH_VEC(*tSpawns, i)
 		spawns.push_back((*tSpawns)[i]);
@@ -1208,6 +1232,8 @@ void ZR_Infect(CCSPlayerController *pAttackerController, CCSPlayerController *pV
 	if (!pVictimController)
 		return;
 
+	CUtlVector<CCSPlayerController*> pSurvivorControllers;
+
 	if (pVictimController->m_iTeamNum() == CS_TEAM_CT)
 		pVictimController->SwitchTeam(CS_TEAM_T);
 
@@ -1222,12 +1248,11 @@ void ZR_Infect(CCSPlayerController *pAttackerController, CCSPlayerController *pV
 
 	// We disabled damage due to the delayed infection, restore
 	pVictimPawn->m_bTakesDamage(true);
+	
 
-	pVictimPawn->EmitSound("zr.amb.scream");
-
-	ZR_StripAndGiveKnife(pVictimPawn);
 	
 	g_pZRPlayerClassManager->ApplyPreferredOrDefaultZombieClass(pVictimPawn);
+
 
 	ZR_InfectShake(pVictimController);
 
@@ -1248,7 +1273,9 @@ void ZR_InfectMotherZombie(CCSPlayerController *pVictimController, std::vector<S
 	if (!pVictimPawn)
 		return;
 
-	ZR_StripAndGiveKnife(pVictimPawn);
+
+
+	pVictimController->SwitchTeam(CS_TEAM_T);
 
 	// pick random spawn point
 	if (g_iInfectSpawnType == EZRSpawnType::RESPAWN)
@@ -1259,9 +1286,6 @@ void ZR_InfectMotherZombie(CCSPlayerController *pVictimController, std::vector<S
 
 		pVictimPawn->Teleport(&origin, &rotation, &vec3_origin);
 	}
-
-	pVictimController->SwitchTeam(CS_TEAM_T);
-	pVictimPawn->EmitSound("zr.amb.scream");
 
 	ZRZombieClass *pClass = g_pZRPlayerClassManager->GetZombieClass("MotherZombie");
 	if (pClass)
@@ -1339,6 +1363,7 @@ void ZR_InitialInfection()
 
 		// a list of player who survived the previous mz roll of this round
 		CUtlVector<CCSPlayerController*> pSurvivorControllers;
+
 		FOR_EACH_VEC(pCandidateControllers, i)
 		{
 			// don't even bother with picked mz or player with 100 immunity
@@ -1372,6 +1397,7 @@ void ZR_InitialInfection()
 			iMZToInfect--;
 		}
 		iFailSafeCounter++;
+
 	}
 
 	// reduce everyone's immunity except mz
@@ -1382,13 +1408,46 @@ void ZR_InitialInfection()
 			continue;
 		
 		pPlayer->SetImmunity(pPlayer->GetImmunity() - g_iMZImmunityReduction);
+
+	}
+
+
+	for (int i = 0; i < gpGlobals->maxClients; i++)
+	{
+		CCSPlayerController* pController = CCSPlayerController::FromSlot(i);
+		if (!pController || !pController->IsConnected() || pController->m_iTeamNum() != CS_TEAM_CT)
+			continue;
+		
+		ClientPrint(pController, HUD_PRINTCENTER, "你是\x04躲藏\x01的人");
+		ClientPrint(pController, HUD_PRINTTALK, ZR_PREFIX "你是\x04躲藏\x01的人, 任务是 20 分钟内\x04不被抓捕的人找到\x01, 抓捕人将在 60 秒后解锁大门开始寻找, 尽全力躲藏和逃亡吧! 祝你好运! ");
+		g_pEngineServer2->ServerCommand("thirdperson");
+		CCSPlayerPawn* pPawn = (CCSPlayerPawn*)pController->GetPawn();
+		pPawn->EmitSound("zr.amb.scream");
+		if (!pPawn || !pPawn->IsAlive())
+			continue;
+		ZRHumanClass *pClass = g_pZRPlayerClassManager->GetHumanClass("HumanClass3");
+		if (pClass)
+			g_pZRPlayerClassManager->ApplyHumanClass(pClass, pPawn);
+		else
+			g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);
+	}
+
+	for (int i = 0; i < gpGlobals->maxClients; i++)
+	{
+		CCSPlayerController* pController = CCSPlayerController::FromSlot(i);
+		if (!pController || !pController->IsConnected() || pController->m_iTeamNum() == CS_TEAM_CT)
+			continue;
+
+		ClientPrint(pController, HUD_PRINTCENTER, "你是\x04抓捕\x01的人");
+		ClientPrint(pController, HUD_PRINTTALK, ZR_PREFIX "你是\x04抓捕\x01的人, 任务是\x04 20 分钟内找到所有躲藏的人\x01, 60 秒后解锁大门方可开始寻找, 努力找到所有躲起来的人吧! 祝你好运! ");
+		
 	}
 
 	if (g_flRespawnDelay < 0.0f)
 		g_bRespawnEnabled = false;
 
-	ClientPrintAll(HUD_PRINTCENTER, "抓捕者已选出,将在 60 秒后释放开始寻找.尽全力躲藏和逃亡吧! 祝你好运! ");
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "抓捕者已选出,将在 60 秒后释放开始寻找.尽全力躲藏和逃亡吧! 祝你好运! ");
+
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "抓捕者已选出, 将在\x04 60 \x01秒后开始寻找. 尽全力躲藏和逃亡吧! 祝你好运!! ");
 	g_ZRRoundState = EZRRoundState::POST_INFECTION;
 }
 
@@ -1411,7 +1470,8 @@ void ZR_StartInitialCountdown()
 		if (g_iInfectionCountDown <= 60)
 		{
 			char message[256];
-			V_snprintf(message, sizeof(message), "即将在 \7%i %s\1!", g_iInfectionCountDown, g_iInfectionCountDown == 1 ? "second" : "秒后随机根据人数选出抓捕者. 回合即将开始, 请做好准备.");
+			V_snprintf(message, sizeof(message), "即将在 \7%i %s\1!", g_iInfectionCountDown, g_iInfectionCountDown == 1 ? "second" : " 秒后随机选出抓捕者并开始游戏");
+
 
 			ClientPrintAll(HUD_PRINTCENTER, message);
 			if (g_iInfectionCountDown % 5 == 0)
@@ -1433,10 +1493,15 @@ bool ZR_Hook_OnTakeDamage_Alive(CTakeDamageInfo *pInfo, CCSPlayerPawn *pVictimPa
 	CCSPlayerController *pAttackerController = CCSPlayerController::FromPawn(pAttackerPawn);
 	CCSPlayerController *pVictimController = CCSPlayerController::FromPawn(pVictimPawn);
 	const char *pszAbilityClass = pInfo->m_hAbility.Get() ? pInfo->m_hAbility.Get()->GetClassname() : "";
-	if (pAttackerPawn->m_iTeamNum() == CS_TEAM_T && pVictimPawn->m_iTeamNum() == CS_TEAM_CT && !V_strncmp(pszAbilityClass, "weapon_knife", 12))
+	if (pAttackerPawn->m_iTeamNum() == CS_TEAM_T && pVictimPawn->m_iTeamNum() == CS_TEAM_CT)
 	{
-		ZR_Infect(pAttackerController, pVictimController, false);
-		return true; // nullify the damage
+		if(V_strncmp(pszAbilityClass, "hegrenade", 12)){
+			return true;
+		}else{
+			ZR_Infect(pAttackerController, pVictimController, false);
+			return true; // nullify the damage
+		}
+
 	}
 
 	if (g_iGroanChance && pVictimPawn->m_iTeamNum() == CS_TEAM_T && (rand() % g_iGroanChance) == 1)
@@ -1475,10 +1540,10 @@ bool ZR_Detour_CCSPlayer_WeaponServices_CanUse(CCSPlayer_WeaponServices *pWeapon
 	if (!pPawn)
 		return false;
 	const char *pszWeaponClassname = pPlayerWeapon->GetClassname();
-	if (pPawn->m_iTeamNum() == CS_TEAM_T && V_strncmp(pszWeaponClassname, "weapon_knife", 12))
+	if (pPawn->m_iTeamNum() == CS_TEAM_CT && V_strncmp(pszWeaponClassname, "weapon_knife", 12))
 		return false;
-	if (pPawn->m_iTeamNum() == CS_TEAM_CT && V_strlen(pszWeaponClassname) > 7 && !g_pZRWeaponConfig->FindWeapon(pszWeaponClassname + 7))
-		return false;
+	/*if (pPawn->m_iTeamNum() == CS_TEAM_CT && V_strlen(pszWeaponClassname) > 7 && !g_pZRWeaponConfig->FindWeapon(pszWeaponClassname + 7))
+		return false;*/
 	// doesn't guarantee the player will pick the weapon up, it just allows the original function to run
 	return true;
 }
@@ -1588,16 +1653,24 @@ void ZR_OnPlayerDeath(IGameEvent* pEvent)
 	if (pVictimPawn->m_iTeamNum() == CS_TEAM_T && g_ZRRoundState == EZRRoundState::POST_INFECTION)
 		pVictimPawn->EmitSound("zr.amb.zombie_die");
 
-	// respawn player
+		
+	if (pVictimController->m_iTeamNum() == CS_TEAM_CT)
+		pVictimController->SwitchTeam(CS_TEAM_T);
+
+// respawn player
 	CHandle<CCSPlayerController> handle = pVictimController->GetHandle();
 	new CTimer(g_flRespawnDelay < 0.0f ? 2.0f : g_flRespawnDelay, false, false, [handle]()
 	{
 		CCSPlayerController* pController = (CCSPlayerController*)handle.Get();
-		if (!pController || !g_bRespawnEnabled || pController->m_iTeamNum < CS_TEAM_T)
+		if (!pController || !g_bRespawnEnabled)
 			return -1.0f;
 		pController->Respawn();
 		return -1.0f;
 	});
+		// This can be null if the victim disconnected right before getting hit AND someone joined in their place immediately, thus replacing the controller
+	if (!pVictimController)
+		return;
+
 }
 
 void ZR_OnRoundFreezeEnd(IGameEvent* pEvent)
@@ -1716,6 +1789,7 @@ void ZR_EndRoundAndAddTeamScore(int iTeamNum)
 		if (!g_szZombieWinOverlayParticle.empty())
 			ZR_CreateOverlay(g_szZombieWinOverlayParticle.c_str(), 1.0f, g_flZombieWinOverlaySize, flRestartDelay, Color(255, 255, 255), g_szZombieWinOverlayMaterial.c_str());
 	}
+	g_pEngineServer2->ServerCommand("mp_roundtime 20");
 }
 
 CON_COMMAND_CHAT(ztele, "- teleport to spawn")
