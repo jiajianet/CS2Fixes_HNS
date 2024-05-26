@@ -1470,7 +1470,7 @@ void ZR_StartInitialCountdown()
 		if (g_iInfectionCountDown <= 60)
 		{
 			char message[256];
-			V_snprintf(message, sizeof(message), "即将在 \7%i %s\1!", g_iInfectionCountDown, g_iInfectionCountDown == 1 ? "second" : " 秒后随机选出抓捕者并开始游戏");
+			V_snprintf(message, sizeof(message), "即将在 \7%i %s\1!", g_iInfectionCountDown, g_iInfectionCountDown == 1 ? "second" : " 秒后根据人数随机选出抓捕者. 回合即将开始, 请做好准备.");
 
 
 			ClientPrintAll(HUD_PRINTCENTER, message);
@@ -1636,7 +1636,7 @@ void ZR_OnPlayerHurt(IGameEvent* pEvent)
 }
 
 void ZR_OnPlayerDeath(IGameEvent* pEvent)
-{
+{/*
 	// fake player_death, don't need to respawn or check win condition
 	if (pEvent->GetBool("infected"))
 		return;
@@ -1670,7 +1670,8 @@ void ZR_OnPlayerDeath(IGameEvent* pEvent)
 		// This can be null if the victim disconnected right before getting hit AND someone joined in their place immediately, thus replacing the controller
 	if (!pVictimController)
 		return;
-
+*/
+	return;
 }
 
 void ZR_OnRoundFreezeEnd(IGameEvent* pEvent)
