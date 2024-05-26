@@ -1422,6 +1422,10 @@ void ZR_InitialInfection()
 		ClientPrint(pController, HUD_PRINTTALK, ZR_PREFIX "你是\x04躲藏\x01的人, 任务是 20 分钟内\x04不被抓捕的人找到\x01, 抓捕人将在 60 秒后解锁大门开始寻找, 尽全力躲藏和逃亡吧! 祝你好运! ");
 		g_pEngineServer2->ServerCommand("thirdperson");
 
+		ZEPlayer *pZEPlayer = pController->GetZEPlayer();
+		ZEPlayerHandle hPlayer = pZEPlayer->GetHandle();
+		CCSPlayerPawn *pSoundPawn = CCSPlayerController::FromSlot(hPlayer.GetPlayerSlot())->GetPlayerPawn();
+		pSoundPawn->EmitSound("zr.amb.scream");
 		if (!pPawn || !pPawn->IsAlive())
 			continue;
 		ZRHumanClass *pClass = g_pZRPlayerClassManager->GetHumanClass("HumanClass3");
@@ -1431,8 +1435,7 @@ void ZR_InitialInfection()
 			g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);
 	}
 
-	CCSPlayerPawn *pSoundPawn = CCSPlayerController::FromSlot(hPlayer.GetPlayerSlot())->GetPlayerPawn();
-	pSoundPawn->EmitSound("zr.amb.scream");
+
 
 	for (int i = 0; i < gpGlobals->maxClients; i++)
 	{
