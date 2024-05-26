@@ -1044,6 +1044,7 @@ void ZR_OnRoundStart(IGameEvent* pEvent)
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "温馨提示: 服务器躲猫猫地图来自Steam创意工坊地图: infernohideandseek , 对于地图中出现的如开箱网站等广告请勿相信! \x04 本服务器不对广告真实性和造成的损失负责!\x01 ");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到\x04 CS2躲猫猫服务器\x01, 服务器服主:\x04 JiaJia\x01. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "服务器版本:\x04 V1.0.1 \x01 更新时间: 2024/05/26");
+
 	SetupRespawnToggler();
 	CZRRegenTimer::RemoveAllTimers();
 
@@ -1445,6 +1446,7 @@ void ZR_InitialInfection()
 	if (g_flRespawnDelay < 0.0f)
 		g_bRespawnEnabled = false;
 
+
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "抓捕者已选出, 将在\x04 60 \x01秒后开始寻找. 尽全力躲藏和逃亡吧! 祝你好运!! ");
 	g_ZRRoundState = EZRRoundState::POST_INFECTION;
 }
@@ -1469,6 +1471,7 @@ void ZR_StartInitialCountdown()
 		{
 			char message[256];
 			V_snprintf(message, sizeof(message), "即将在 \7%i %s\1!", g_iInfectionCountDown, g_iInfectionCountDown == 1 ? "second" : " 秒后随机选出抓捕者并开始游戏");
+
 
 			ClientPrintAll(HUD_PRINTCENTER, message);
 			if (g_iInfectionCountDown % 5 == 0)
