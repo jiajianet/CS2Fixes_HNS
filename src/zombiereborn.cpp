@@ -896,10 +896,6 @@ void ZR_OnLevelInit()
 		g_pEngineServer2->ServerCommand("bot_quota_mode fill"); // Necessary to fix bots kicked/joining infinitely when forced to CT https://github.com/Source2ZE/ZombieReborn/issues/64
 		g_pEngineServer2->ServerCommand("mp_ignore_round_win_conditions 1");
 		// These disable most of the buy menu for zombies
-		g_pEngineServer2->ServerCommand("mp_weapons_allow_pistols 1");
-		g_pEngineServer2->ServerCommand("mp_weapons_allow_smgs 1");
-		g_pEngineServer2->ServerCommand("mp_weapons_allow_heavy 1");
-		g_pEngineServer2->ServerCommand("mp_weapons_allow_rifles 1");
 		g_pEngineServer2->ServerCommand("sv_cheats true");
 		g_pEngineServer2->ServerCommand("noclip off");
 		g_pEngineServer2->ServerCommand("sv_autobunnyhopping 0");
@@ -1492,7 +1488,7 @@ bool ZR_Hook_OnTakeDamage_Alive(CTakeDamageInfo *pInfo, CCSPlayerPawn *pVictimPa
 	CCSPlayerController *pAttackerController = CCSPlayerController::FromPawn(pAttackerPawn);
 	CCSPlayerController *pVictimController = CCSPlayerController::FromPawn(pVictimPawn);
 	const char *pszAbilityClass = pInfo->m_hAbility.Get() ? pInfo->m_hAbility.Get()->GetClassname() : "";
-	if (pAttackerPawn->m_iTeamNum() == CS_TEAM_T && pVictimPawn->m_iTeamNum() == CS_TEAM_CT && !V_strncmp(pszAbilityClass, "weapon_knife", 12))
+	if (pAttackerPawn->m_iTeamNum() == CS_TEAM_T && pVictimPawn->m_iTeamNum() == CS_TEAM_CT)
 	{
 		ZR_Infect(pAttackerController, pVictimController, false);
 		return true; // nullify the damage
