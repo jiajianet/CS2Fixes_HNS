@@ -902,7 +902,19 @@ void ZR_OnLevelInit()
 		g_pEngineServer2->ServerCommand("mp_weapons_allow_rifles 3");
 		g_pEngineServer2->ServerCommand("sv_cheats true");
 		g_pEngineServer2->ServerCommand("noclip off");
-
+		g_pEngineServer2->ServerCommand("sv_autobunnyhopping 0");
+		g_pEngineServer2->ServerCommand("sv_noclipspeed 0.000001");
+		g_pEngineServer2->ServerCommand("mp_autokick 0");
+		g_pEngineServer2->ServerCommand("mp_solid_teammates 1");
+		g_pEngineServer2->ServerCommand("mp_autoteambalance 0");
+		g_pEngineServer2->ServerCommand("mp_buy_anywhere 1");
+		g_pEngineServer2->ServerCommand("mp_buytime 9999");
+		g_pEngineServer2->ServerCommand("mp_startmoney 700");
+		g_pEngineServer2->ServerCommand("mp_maxmoney 5000");
+		g_pEngineServer2->ServerCommand("sv_alltalk 0");
+		g_pEngineServer2->ServerCommand("mp_free_armor 2");
+		g_pEngineServer2->ServerCommand("ammo_grenade_limit_total 6");
+		
 
 		return -1.0f;
 	});
@@ -1031,8 +1043,9 @@ void SetupCTeams()
 
 void ZR_OnRoundStart(IGameEvent* pEvent)
 {
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "温馨提示: 服务器躲猫猫地图来自Steam创意工坊地图: infernohideandseek , 对于地图中出现的如开箱网站等广告请勿相信! 本服务器不对广告真实性和造成的损失负责! ");
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到 CS2躲猫猫服务器, 服务器服主: JiaJia. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "温馨提示: 服务器躲猫猫地图来自Steam创意工坊地图: infernohideandseek , 对于地图中出现的如开箱网站等广告请勿相信! \x04 本服务器不对广告真实性和造成的损失负责!\x01 ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到\x04 CS2躲猫猫服务器\x01, 服务器服主:\x04 JiaJia\x01. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "服务器版本:\x04 V1.0.1 \x01 更新时间: 2024/05/26");
 	SetupRespawnToggler();
 	CZRRegenTimer::RemoveAllTimers();
 
@@ -1071,6 +1084,8 @@ void ZR_OnPlayerSpawn(IGameEvent* pEvent)
 	else
 	{
 		pController->SwitchTeam(CS_TEAM_CT);
+		CCSPlayerPawn *pPawn = (CCSPlayerPawn*)pController->GetPawn();
+		ZR_StripAndGiveKnife(pPawn);
 	}
 
 	CHandle<CCSPlayerController> handle = pController->GetHandle();
@@ -1425,14 +1440,14 @@ void ZR_InitialInfection()
 			continue;
 
 		ClientPrint(pController, HUD_PRINTCENTER, "你是\x04抓捕\x01的人");
-		ClientPrint(pController, HUD_PRINTTALK, ZR_PREFIX "你是\x04抓捕\x01的人, 任务是 20 分钟内\x04找到所有躲藏的人\x01, 60 秒后解锁大门方可开始寻找, 努力找到所有躲起来的人吧! 祝你好运! ");
+		ClientPrint(pController, HUD_PRINTTALK, ZR_PREFIX "你是\x04抓捕\x01的人, 任务是\x04 20 分钟内找到所有躲藏的人\x01, 60 秒后解锁大门方可开始寻找, 努力找到所有躲起来的人吧! 祝你好运! ");
 		
 	}
 
 	if (g_flRespawnDelay < 0.0f)
 		g_bRespawnEnabled = false;
 
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "抓捕者已选出, 将在 60 秒后开始寻找. 尽全力躲藏和逃亡吧! 祝你好运!! ");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "抓捕者已选出, 将在\x04 60 \x01秒后开始寻找. 尽全力躲藏和逃亡吧! 祝你好运!! ");
 	g_ZRRoundState = EZRRoundState::POST_INFECTION;
 }
 
@@ -1519,9 +1534,9 @@ bool ZR_Detour_CCSPlayer_WeaponServices_CanUse(CCSPlayer_WeaponServices *pWeapon
 	if (!pPawn)
 		return false;
 	const char *pszWeaponClassname = pPlayerWeapon->GetClassname();
-	if (pPawn->m_iTeamNum() == CS_TEAM_T && V_strncmp(pszWeaponClassname, "weapon_knife", 12))
+	if (pPawn->m_iTeamNum() == CS_TEAM_CT && V_strncmp(pszWeaponClassname, "weapon_knife", 12))
 		return false;
-	if (pPawn->m_iTeamNum() == CS_TEAM_CT && V_strlen(pszWeaponClassname) > 7 && !g_pZRWeaponConfig->FindWeapon(pszWeaponClassname + 7))
+	if (pPawn->m_iTeamNum() == CS_TEAM_T && V_strlen(pszWeaponClassname) > 7 && !g_pZRWeaponConfig->FindWeapon(pszWeaponClassname + 7))
 		return false;
 	// doesn't guarantee the player will pick the weapon up, it just allows the original function to run
 	return true;
@@ -1760,6 +1775,7 @@ void ZR_EndRoundAndAddTeamScore(int iTeamNum)
 		if (!g_szZombieWinOverlayParticle.empty())
 			ZR_CreateOverlay(g_szZombieWinOverlayParticle.c_str(), 1.0f, g_flZombieWinOverlaySize, flRestartDelay, Color(255, 255, 255), g_szZombieWinOverlayMaterial.c_str());
 	}
+	g_pEngineServer2->ServerCommand("mp_roundtime 20");
 }
 
 CON_COMMAND_CHAT(ztele, "- teleport to spawn")
