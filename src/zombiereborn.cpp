@@ -1421,8 +1421,7 @@ void ZR_InitialInfection()
 		ClientPrint(pController, HUD_PRINTCENTER, "你是\x04躲藏\x01的人");
 		ClientPrint(pController, HUD_PRINTTALK, ZR_PREFIX "你是\x04躲藏\x01的人, 任务是 20 分钟内\x04不被抓捕的人找到\x01, 抓捕人将在 60 秒后解锁大门开始寻找, 尽全力躲藏和逃亡吧! 祝你好运! ");
 		g_pEngineServer2->ServerCommand("thirdperson");
-		CCSPlayerPawn* pPawn = (CCSPlayerPawn*)pController->GetPawn();
-		pPawn->EmitSound("zr.amb.scream");
+
 		if (!pPawn || !pPawn->IsAlive())
 			continue;
 		ZRHumanClass *pClass = g_pZRPlayerClassManager->GetHumanClass("HumanClass3");
@@ -1431,6 +1430,9 @@ void ZR_InitialInfection()
 		else
 			g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);
 	}
+
+	CCSPlayerPawn *pSoundPawn = CCSPlayerController::FromSlot(hPlayer.GetPlayerSlot())->GetPlayerPawn();
+	pSoundPawn->EmitSound("zr.amb.scream");
 
 	for (int i = 0; i < gpGlobals->maxClients; i++)
 	{
@@ -1634,7 +1636,7 @@ void ZR_OnPlayerHurt(IGameEvent* pEvent)
 	if (pAttackerController->m_iTeamNum() == CS_TEAM_CT && pVictimController->m_iTeamNum() == CS_TEAM_T)
 		ZR_ApplyKnockback((CCSPlayerPawn*)pAttackerController->GetPawn(), (CCSPlayerPawn*)pVictimController->GetPawn(), iDmgHealth, szWeapon);
 }
-/*
+
 void ZR_OnPlayerDeath(IGameEvent* pEvent)
 {
 	// fake player_death, don't need to respawn or check win condition
@@ -1665,7 +1667,6 @@ void ZR_OnPlayerDeath(IGameEvent* pEvent)
 		return;
 
 }
-*/
 void ZR_OnRoundFreezeEnd(IGameEvent* pEvent)
 {
 	ZR_StartInitialCountdown();

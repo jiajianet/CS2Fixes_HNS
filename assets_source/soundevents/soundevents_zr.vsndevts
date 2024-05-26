@@ -19,7 +19,7 @@
         base = "zr.amb.base"
         vsnd_files_track_01 = 
         [
-            "sounds/zr/fz_scream1.vsnd",
+            "sounds/music/valve_csgo_01/mainmenu.vsnd",
         ]
     }
     zr.amb.zombie_die = 

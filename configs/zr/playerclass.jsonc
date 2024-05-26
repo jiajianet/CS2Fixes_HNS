@@ -41,7 +41,7 @@
 			"models": [ // if base or child class have more than 2 model entries, all keys have to be defined and will override base model entries
 				// model entry applied to the player will be picked randomly
 				{
-					"modelname": "models/newplanted.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"modelname": "models/boat.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
 					"color": "255 255 255",
 					"skins": [
 						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
@@ -54,6 +54,41 @@
 				},
 				{
 					"modelname": "models/inferno_hns_2020/door_collection_d_infernohns/door_collection_d_infernohns.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},
+				{
+					"modelname": "models/newplanted.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},
+				{
+					"modelname": "models/inferno_hns_2020/monitor_infernohns/monitor02_infernohns.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},
+				{
+					"modelname": "models/inferno_hns_2020/book/book.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},
+				{
+					"modelname": "models/inferno_hns_2020/lily_pad_infernohns/lily_pad_infernohns.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},
+				{
+					"modelname": "models/inferno_hns_2020/mall_bigleaves_plant01_medium_infernohns/mall_bigleaves_plant01_medium_infernohns.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
 					"color": "255 255 255",
 					"skins": [
 						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
