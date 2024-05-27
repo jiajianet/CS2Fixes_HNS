@@ -1424,8 +1424,7 @@ void ZR_InitialInfection()
 
 		CCSPlayerPawn *pPawn = (CCSPlayerPawn*)pController->GetPawn();
 		pPawn->EmitSound("zr.amb.scream");
-
-		CCSPlayerPawn* pPawn = (CCSPlayerPawn*)pController->GetPawn();
+		
 		if (!pPawn || !pPawn->IsAlive())
 			continue;
 		ZRHumanClass *pClass = g_pZRPlayerClassManager->GetHumanClass("HumanClass3");
