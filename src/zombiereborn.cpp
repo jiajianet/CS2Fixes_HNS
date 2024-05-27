@@ -1434,9 +1434,6 @@ void ZR_InitialInfection()
 			g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);
 	}
 
-
-		CCSPlayerController* pSoundController = (CCSPlayerController*)pSurvivorControllers[randomindex];
-
 		
 
 	for (int i = 0; i < gpGlobals->maxClients; i++)
