@@ -53,7 +53,7 @@
 					"skins": 0
 				},
 				{
-					"modelname": "models/inferno_hns_2020/door_collection_d_infernohns/door_collection_d_infernohns.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"modelname": "/models/props_interiors/bed.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
 					"color": "255 255 255",
 					"skins": [
 						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
@@ -88,7 +88,63 @@
 					]
 				},
 				{
+					"modelname": "models/props_office/office_keyboard.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},
+				{
+					"modelname": "models/inferno_hns_2020/mouse/mouse.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},				
+				{
 					"modelname": "models/inferno_hns_2020/mall_bigleaves_plant01_medium_infernohns/mall_bigleaves_plant01_medium_infernohns.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},				
+				{
+					"modelname": "models/inferno_hns_2020/inferno_balcony_door_01_infernohns/inferno_balcony_door_01_infernohns.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},				
+				{
+					"modelname": "models/chicken/chicken.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},				
+				{
+					"modelname": "models/food/pizza/pizza_1.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},				
+				{
+					"modelname": "models/de_inferno/grass/inferno_weed_cluster_01.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},				
+				{
+					"modelname": "models/cs_italy/italy_food_fish/italy_food_fish_01.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
+					"color": "255 255 255",
+					"skins": [
+						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
+					]
+				},				
+				{
+					"modelname": "models/food/dishes/interior_cup_mug_001.vmdl", // A custom model which will be automatically precached, must be loaded onto server/client by some means (e.g. MultiAddonManager)
 					"color": "255 255 255",
 					"skins": [
 						0 // picking skins out of 5 [0-4] available in S2ZE Isaac Clarke model to be applied to the player randomly
