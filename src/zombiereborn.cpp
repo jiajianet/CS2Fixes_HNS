@@ -1424,8 +1424,7 @@ void ZR_InitialInfection()
 
 		CCSPlayerPawn *pPawn = (CCSPlayerPawn*)pController->GetPawn();
 		pPawn->EmitSound("zr.amb.scream");
-
-		CCSPlayerPawn* pPawn = (CCSPlayerPawn*)pController->GetPawn();
+		
 		if (!pPawn || !pPawn->IsAlive())
 			continue;
 		ZRHumanClass *pClass = g_pZRPlayerClassManager->GetHumanClass("HumanClass3");
@@ -1434,9 +1433,6 @@ void ZR_InitialInfection()
 		else
 			g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);
 	}
-
-
-		CCSPlayerController* pSoundController = (CCSPlayerController*)pSurvivorControllers[randomindex];
 
 		
 
@@ -1493,7 +1489,7 @@ void ZR_StartInitialCountdown()
 
 bool ZR_Hook_OnTakeDamage_Alive(CTakeDamageInfo *pInfo, CCSPlayerPawn *pVictimPawn)
 {
-	CCSPlayerPawn* pAttackerPawn = (CCSPlayerPawn*)pInfo->m_hAttacker.Get();
+CCSPlayerPawn* pAttackerPawn = (CCSPlayerPawn*)pInfo->m_hAttacker.Get();
 
 	if (!(pAttackerPawn && pVictimPawn && pAttackerPawn->IsPawn() && pVictimPawn->IsPawn()))
 		return false;
@@ -1501,15 +1497,10 @@ bool ZR_Hook_OnTakeDamage_Alive(CTakeDamageInfo *pInfo, CCSPlayerPawn *pVictimPa
 	CCSPlayerController *pAttackerController = CCSPlayerController::FromPawn(pAttackerPawn);
 	CCSPlayerController *pVictimController = CCSPlayerController::FromPawn(pVictimPawn);
 	const char *pszAbilityClass = pInfo->m_hAbility.Get() ? pInfo->m_hAbility.Get()->GetClassname() : "";
-	if (pAttackerPawn->m_iTeamNum() == CS_TEAM_T && pVictimPawn->m_iTeamNum() == CS_TEAM_CT)
+	if (pAttackerPawn->m_iTeamNum() == CS_TEAM_T && pVictimPawn->m_iTeamNum() == CS_TEAM_CT && !V_strncmp(pszAbilityClass, "weapon_knife", 12))
 	{
-		if(V_strncmp(pszAbilityClass, "hegrenade", 12)){
-			return true;
-		}else{
-			ZR_Infect(pAttackerController, pVictimController, false);
-			return true; // nullify the damage
-		}
-
+		ZR_Infect(pAttackerController, pVictimController, false);
+		return true; // nullify the damage
 	}
 
 	if (g_iGroanChance && pVictimPawn->m_iTeamNum() == CS_TEAM_T && (rand() % g_iGroanChance) == 1)
