@@ -1045,10 +1045,11 @@ void ZR_OnRoundStart(IGameEvent* pEvent)
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到\x04 CS2躲猫猫服务器\x01, 服务器服主:\x04 JiaJia\x01. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "服务器版本:\x04 V1.0.2 \x01 更新时间: 2024/06/01");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 更新日志: \x01 更新时间: 2024/05/26");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [玩法升级!] \x01 服务器现已新增上线手电筒功能, 用于在非常黑暗阴森的小角落照明, 按F键可切换开关.抓捕者和躲藏者均可使用, 手电筒的光为端侧渲染, 不在其他玩家电脑上显示, 使用时无需担心暴露位置.");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [新改动!] \x01 为增强游戏体验, 单局躲猫猫回合时间现已变更为10分钟.");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [新改动!] \x01 为等待更多玩家加入, 回合开始前等待时间已修改为根据人数自动随机2-3分钟.");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [新改动!] \x01 服务器现已默认开启自动连跳.");
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [新改动!] \x01 .");
+
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [模型升级!] \x01 增加了更多模型, 调整部分不正常模型.");
 
 
@@ -1431,14 +1432,14 @@ void ZR_InitialInfection()
 
 		CCSPlayerPawn *pPawn = (CCSPlayerPawn*)pController->GetPawn();
 		pPawn->EmitSound("zr.amb.scream");
-		
+		/*
 		if (!pPawn || !pPawn->IsAlive())
 			continue;
 		ZRHumanClass *pClass = g_pZRPlayerClassManager->GetHumanClass("HumanClass3");
 		if (pClass)
 			g_pZRPlayerClassManager->ApplyHumanClass(pClass, pPawn);
 		else
-			g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);
+			g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);*/
 	}
 
 		
