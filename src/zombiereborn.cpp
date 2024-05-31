@@ -890,7 +890,7 @@ void ZR_OnLevelInit()
 	new CTimer(0.02f, false, true, []()
 	{
 		// Here we force some cvars that are necessary for the gamemode
-		g_pEngineServer2->ServerCommand("mp_roundtime 20");
+		g_pEngineServer2->ServerCommand("mp_roundtime 10");
 		g_pEngineServer2->ServerCommand("mp_give_player_c4 0");
 		g_pEngineServer2->ServerCommand("mp_friendlyfire 0");
 		g_pEngineServer2->ServerCommand("bot_quota_mode fill"); // Necessary to fix bots kicked/joining infinitely when forced to CT https://github.com/Source2ZE/ZombieReborn/issues/64
@@ -898,15 +898,15 @@ void ZR_OnLevelInit()
 		// These disable most of the buy menu for zombies
 		g_pEngineServer2->ServerCommand("sv_cheats true");
 		g_pEngineServer2->ServerCommand("noclip off");
-		g_pEngineServer2->ServerCommand("sv_autobunnyhopping 0");
+		g_pEngineServer2->ServerCommand("sv_autobunnyhopping 1");
 		g_pEngineServer2->ServerCommand("sv_noclipspeed 0.000001");
 		g_pEngineServer2->ServerCommand("mp_autokick 0");
 		g_pEngineServer2->ServerCommand("mp_solid_teammates 1");
 		g_pEngineServer2->ServerCommand("mp_autoteambalance 0");
 		g_pEngineServer2->ServerCommand("mp_buy_anywhere 1");
 		g_pEngineServer2->ServerCommand("mp_buytime 9999");
-		g_pEngineServer2->ServerCommand("mp_startmoney 700");
-		g_pEngineServer2->ServerCommand("mp_maxmoney 5000");
+		g_pEngineServer2->ServerCommand("mp_startmoney 10000");
+		g_pEngineServer2->ServerCommand("mp_maxmoney 10000");
 		g_pEngineServer2->ServerCommand("sv_alltalk 0");
 		g_pEngineServer2->ServerCommand("mp_free_armor 2");
 		g_pEngineServer2->ServerCommand("ammo_grenade_limit_total 6");
@@ -1043,7 +1043,14 @@ void ZR_OnRoundStart(IGameEvent* pEvent)
 {
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "温馨提示: 服务器躲猫猫地图来自Steam创意工坊地图: infernohideandseek , 对于地图中出现的如开箱网站等广告请勿相信! \x04 本服务器不对广告真实性和造成的损失负责!\x01 ");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到\x04 CS2躲猫猫服务器\x01, 服务器服主:\x04 JiaJia\x01. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "服务器版本:\x04 V1.0.1 \x01 更新时间: 2024/05/26");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "服务器版本:\x04 V1.0.2 \x01 更新时间: 2024/06/01");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 更新日志: \x01 更新时间: 2024/05/26");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [新改动!] \x01 为增强游戏体验, 单局躲猫猫回合时间现已变更为10分钟.");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [新改动!] \x01 为等待更多玩家加入, 回合开始前等待时间已修改为根据人数自动随机2-3分钟.");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [新改动!] \x01 服务器现已默认开启自动连跳.");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [新改动!] \x01 .");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [模型升级!] \x01 增加了更多模型, 调整部分不正常模型.");
+
 
 	SetupRespawnToggler();
 	CZRRegenTimer::RemoveAllTimers();
@@ -1497,7 +1504,7 @@ CCSPlayerPawn* pAttackerPawn = (CCSPlayerPawn*)pInfo->m_hAttacker.Get();
 	CCSPlayerController *pAttackerController = CCSPlayerController::FromPawn(pAttackerPawn);
 	CCSPlayerController *pVictimController = CCSPlayerController::FromPawn(pVictimPawn);
 	const char *pszAbilityClass = pInfo->m_hAbility.Get() ? pInfo->m_hAbility.Get()->GetClassname() : "";
-	if (pAttackerPawn->m_iTeamNum() == CS_TEAM_T && pVictimPawn->m_iTeamNum() == CS_TEAM_CT && !V_strncmp(pszAbilityClass, "weapon_knife", 12))
+	if (pAttackerPawn->m_iTeamNum() == CS_TEAM_T && pVictimPawn->m_iTeamNum() == CS_TEAM_CT)
 	{
 		ZR_Infect(pAttackerController, pVictimController, false);
 		return true; // nullify the damage
