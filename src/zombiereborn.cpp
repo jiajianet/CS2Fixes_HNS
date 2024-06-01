@@ -899,7 +899,7 @@ void ZR_OnLevelInit()
 		g_pEngineServer2->ServerCommand("sv_cheats true");
 		g_pEngineServer2->ServerCommand("noclip off");
 		g_pEngineServer2->ServerCommand("sv_autobunnyhopping 1");
-		g_pEngineServer2->ServerCommand("sv_noclipspeed 0.000001");
+		g_pEngineServer2->ServerCommand("sv_noclipspeed 5");
 		g_pEngineServer2->ServerCommand("mp_autokick 0");
 		g_pEngineServer2->ServerCommand("mp_solid_teammates 1");
 		g_pEngineServer2->ServerCommand("mp_autoteambalance 0");
@@ -1043,14 +1043,17 @@ void ZR_OnRoundStart(IGameEvent* pEvent)
 {
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "温馨提示: 服务器躲猫猫地图来自Steam创意工坊地图: infernohideandseek , 对于地图中出现的如开箱网站等广告请勿相信! \x04 本服务器不对广告真实性和造成的损失负责!\x01 ");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "欢迎来到\x04 CS2躲猫猫服务器\x01, 服务器服主:\x04 JiaJia\x01. 时间结束后会随机选取几个抓的人, 选择合适的地点, 用优秀的伪装躲避追捕吧! ");
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "服务器版本:\x04 V1.0.2 \x01 更新时间: 2024/06/01");
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 更新日志: \x01 更新时间: 2024/05/26");
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [玩法升级!] \x01 服务器现已新增上线手电筒功能, 用于在非常黑暗阴森的小角落照明, 按F键可切换开关.抓捕者和躲藏者均可使用, 手电筒的光为端侧渲染, 不在其他玩家电脑上显示, 使用时无需担心暴露位置.");
-	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [新改动!] \x01 为增强游戏体验, 单局躲猫猫回合时间现已变更为10分钟.");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "服务器版本:\x04 V1.1.0 \x01 更新时间: 2024/06/01");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 更新日志: \x01");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [玩法升级!] \x01 服务器现已新增上线手电筒功能, 用于在非常黑暗阴森的小角落照明, 按F键可切换开关. 抓捕者和躲藏者均可使用, 手电筒的光为端侧渲染, 不在其他玩家电脑上显示, 使用时无需担心暴露位置.");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [玩法升级!] \x01 服务器现已启用新的修改地图, 回合躲藏时会自动播放音乐.");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [玩法调整!] \x01 抓捕者现已可使用手雷和燃烧弹找到躲藏者, 判定机制为躲藏者受到手雷和燃烧弹的伤害即被找到.");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [新改动!] \x01 为增强游戏体验, 单局躲猫猫回合时间现已变更为 10 分钟.");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [新改动!] \x01 为等待更多玩家加入, 回合开始前等待时间已修改为根据人数自动随机2-3分钟.");
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [新改动!] \x01 服务器现已默认开启自动连跳.");
-
 	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [模型升级!] \x01 增加了更多模型, 调整部分不正常模型.");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [优化升级!] \x01 删除了地图的 bot navigation mesh lookup, 提升服务器性能.");
+	ClientPrintAll(HUD_PRINTTALK, ZR_PREFIX "\x04 [优化升级!] \x01 服务器启用了旧的 CSGO trigger_push behavior, 提升服务器并发性能.");
 
 
 	SetupRespawnToggler();
@@ -1304,11 +1307,7 @@ void ZR_InfectMotherZombie(CCSPlayerController *pVictimController, std::vector<S
 	ZR_InfectShake(pVictimController);
 
 	ZEPlayer *pZEPlayer = pVictimController->GetZEPlayer();
-
 	pZEPlayer->SetInfectState(true);
-
-	ZEPlayerHandle hPlayer = pZEPlayer->GetHandle();
-	new CTimer(g_flMoanInterval + (rand() % 5), false, false, [hPlayer]() { return ZR_MoanTimer(hPlayer); });
 }
 
 // make players who've been picked as MZ recently less likely to be picked again
@@ -1427,19 +1426,19 @@ void ZR_InitialInfection()
 			continue;
 		
 		ClientPrint(pController, HUD_PRINTCENTER, "你是\x04躲藏\x01的人");
-		ClientPrint(pController, HUD_PRINTTALK, ZR_PREFIX "你是\x04躲藏\x01的人, 任务是 20 分钟内\x04不被抓捕的人找到\x01, 抓捕人将在 60 秒后解锁大门开始寻找, 尽全力躲藏和逃亡吧! 祝你好运! ");
+		ClientPrint(pController, HUD_PRINTTALK, ZR_PREFIX "你是\x04躲藏\x01的人, 任务是 10 分钟内\x04不被抓捕的人找到\x01, 抓捕者将在 60 秒后解锁大门开始寻找, 尽全力躲藏和逃亡吧! 祝你好运! ");
 		g_pEngineServer2->ServerCommand("thirdperson");
 
 		CCSPlayerPawn *pPawn = (CCSPlayerPawn*)pController->GetPawn();
 		pPawn->EmitSound("zr.amb.scream");
-		/*
+		
 		if (!pPawn || !pPawn->IsAlive())
 			continue;
 		ZRHumanClass *pClass = g_pZRPlayerClassManager->GetHumanClass("HumanClass3");
 		if (pClass)
 			g_pZRPlayerClassManager->ApplyHumanClass(pClass, pPawn);
 		else
-			g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);*/
+			g_pZRPlayerClassManager->ApplyPreferredOrDefaultHumanClass(pPawn);
 	}
 
 		
