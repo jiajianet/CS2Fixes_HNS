@@ -657,6 +657,7 @@ ZRHumanClass* CZRPlayerClassManager::GetHumanClass(const char *pszClassName)
 
 void ZR_StripAndGiveKnife(CCSPlayerPawn *pPawn)
 {
+	
 	CCSPlayer_ItemServices *pItemServices = pPawn->m_pItemServices();
 
 	// it can sometimes be null when player joined on the very first round? 
