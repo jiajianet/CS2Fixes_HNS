@@ -65,7 +65,6 @@ for sdk_target in MMSPlugin.sdk_targets:
     'src/utils/entity.cpp',
     'src/cs2_sdk/schema.cpp',
     'src/ctimer.cpp',
-    'src/panoramavote.cpp',
     'src/playermanager.cpp',
     'src/gameconfig.cpp',
     'src/gamesystem.cpp',

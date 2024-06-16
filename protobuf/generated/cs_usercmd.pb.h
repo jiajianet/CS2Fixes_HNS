@@ -63,7 +63,7 @@ PROTOBUF_NAMESPACE_CLOSE
 
 // ===================================================================
 
-class CSGOInterpolationInfoPB :
+class CSGOInterpolationInfoPB final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CSGOInterpolationInfoPB) */ {
  public:
   inline CSGOInterpolationInfoPB() : CSGOInterpolationInfoPB(nullptr) {}
@@ -253,7 +253,7 @@ class CSGOInterpolationInfoPB :
 };
 // -------------------------------------------------------------------
 
-class CSGOInputHistoryEntryPB :
+class CSGOInputHistoryEntryPB final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CSGOInputHistoryEntryPB) */ {
  public:
   inline CSGOInputHistoryEntryPB() : CSGOInputHistoryEntryPB(nullptr) {}
@@ -668,7 +668,7 @@ class CSGOInputHistoryEntryPB :
 };
 // -------------------------------------------------------------------
 
-class CSGOUserCmdPB :
+class CSGOUserCmdPB final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CSGOUserCmdPB) */ {
  public:
   inline CSGOUserCmdPB() : CSGOUserCmdPB(nullptr) {}
@@ -798,7 +798,6 @@ class CSGOUserCmdPB :
   enum : int {
     kInputHistoryFieldNumber = 2,
     kBaseFieldNumber = 1,
-    kLeftHandDesiredFieldNumber = 9,
     kAttack3StartHistoryIndexFieldNumber = 8,
     kAttack1StartHistoryIndexFieldNumber = 6,
     kAttack2StartHistoryIndexFieldNumber = 7,
@@ -838,19 +837,6 @@ class CSGOUserCmdPB :
   void unsafe_arena_set_allocated_base(
       ::CBaseUserCmdPB* base);
   ::CBaseUserCmdPB* unsafe_arena_release_base();
-
-  // optional bool left_hand_desired = 9 [default = false];
-  bool has_left_hand_desired() const;
-  private:
-  bool _internal_has_left_hand_desired() const;
-  public:
-  void clear_left_hand_desired();
-  bool left_hand_desired() const;
-  void set_left_hand_desired(bool value);
-  private:
-  bool _internal_left_hand_desired() const;
-  void _internal_set_left_hand_desired(bool value);
-  public:
 
   // optional int32 attack3_start_history_index = 8 [default = -1];
   bool has_attack3_start_history_index() const;
@@ -903,7 +889,6 @@ class CSGOUserCmdPB :
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::CSGOInputHistoryEntryPB > input_history_;
     ::CBaseUserCmdPB* base_;
-    bool left_hand_desired_;
     int32_t attack3_start_history_index_;
     int32_t attack1_start_history_index_;
     int32_t attack2_start_history_index_;
@@ -2106,7 +2091,7 @@ CSGOUserCmdPB::input_history() const {
 
 // optional int32 attack1_start_history_index = 6 [default = -1];
 inline bool CSGOUserCmdPB::_internal_has_attack1_start_history_index() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
 inline bool CSGOUserCmdPB::has_attack1_start_history_index() const {
@@ -2114,7 +2099,7 @@ inline bool CSGOUserCmdPB::has_attack1_start_history_index() const {
 }
 inline void CSGOUserCmdPB::clear_attack1_start_history_index() {
   _impl_.attack1_start_history_index_ = -1;
-  _impl_._has_bits_[0] &= ~0x00000008u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline int32_t CSGOUserCmdPB::_internal_attack1_start_history_index() const {
   return _impl_.attack1_start_history_index_;
@@ -2124,7 +2109,7 @@ inline int32_t CSGOUserCmdPB::attack1_start_history_index() const {
   return _internal_attack1_start_history_index();
 }
 inline void CSGOUserCmdPB::_internal_set_attack1_start_history_index(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000008u;
+  _impl_._has_bits_[0] |= 0x00000004u;
   _impl_.attack1_start_history_index_ = value;
 }
 inline void CSGOUserCmdPB::set_attack1_start_history_index(int32_t value) {
@@ -2134,7 +2119,7 @@ inline void CSGOUserCmdPB::set_attack1_start_history_index(int32_t value) {
 
 // optional int32 attack2_start_history_index = 7 [default = -1];
 inline bool CSGOUserCmdPB::_internal_has_attack2_start_history_index() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   return value;
 }
 inline bool CSGOUserCmdPB::has_attack2_start_history_index() const {
@@ -2142,7 +2127,7 @@ inline bool CSGOUserCmdPB::has_attack2_start_history_index() const {
 }
 inline void CSGOUserCmdPB::clear_attack2_start_history_index() {
   _impl_.attack2_start_history_index_ = -1;
-  _impl_._has_bits_[0] &= ~0x00000010u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline int32_t CSGOUserCmdPB::_internal_attack2_start_history_index() const {
   return _impl_.attack2_start_history_index_;
@@ -2152,7 +2137,7 @@ inline int32_t CSGOUserCmdPB::attack2_start_history_index() const {
   return _internal_attack2_start_history_index();
 }
 inline void CSGOUserCmdPB::_internal_set_attack2_start_history_index(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000010u;
+  _impl_._has_bits_[0] |= 0x00000008u;
   _impl_.attack2_start_history_index_ = value;
 }
 inline void CSGOUserCmdPB::set_attack2_start_history_index(int32_t value) {
@@ -2162,7 +2147,7 @@ inline void CSGOUserCmdPB::set_attack2_start_history_index(int32_t value) {
 
 // optional int32 attack3_start_history_index = 8 [default = -1];
 inline bool CSGOUserCmdPB::_internal_has_attack3_start_history_index() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline bool CSGOUserCmdPB::has_attack3_start_history_index() const {
@@ -2170,7 +2155,7 @@ inline bool CSGOUserCmdPB::has_attack3_start_history_index() const {
 }
 inline void CSGOUserCmdPB::clear_attack3_start_history_index() {
   _impl_.attack3_start_history_index_ = -1;
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline int32_t CSGOUserCmdPB::_internal_attack3_start_history_index() const {
   return _impl_.attack3_start_history_index_;
@@ -2180,40 +2165,12 @@ inline int32_t CSGOUserCmdPB::attack3_start_history_index() const {
   return _internal_attack3_start_history_index();
 }
 inline void CSGOUserCmdPB::_internal_set_attack3_start_history_index(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.attack3_start_history_index_ = value;
 }
 inline void CSGOUserCmdPB::set_attack3_start_history_index(int32_t value) {
   _internal_set_attack3_start_history_index(value);
   // @@protoc_insertion_point(field_set:CSGOUserCmdPB.attack3_start_history_index)
-}
-
-// optional bool left_hand_desired = 9 [default = false];
-inline bool CSGOUserCmdPB::_internal_has_left_hand_desired() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool CSGOUserCmdPB::has_left_hand_desired() const {
-  return _internal_has_left_hand_desired();
-}
-inline void CSGOUserCmdPB::clear_left_hand_desired() {
-  _impl_.left_hand_desired_ = false;
-  _impl_._has_bits_[0] &= ~0x00000002u;
-}
-inline bool CSGOUserCmdPB::_internal_left_hand_desired() const {
-  return _impl_.left_hand_desired_;
-}
-inline bool CSGOUserCmdPB::left_hand_desired() const {
-  // @@protoc_insertion_point(field_get:CSGOUserCmdPB.left_hand_desired)
-  return _internal_left_hand_desired();
-}
-inline void CSGOUserCmdPB::_internal_set_left_hand_desired(bool value) {
-  _impl_._has_bits_[0] |= 0x00000002u;
-  _impl_.left_hand_desired_ = value;
-}
-inline void CSGOUserCmdPB::set_left_hand_desired(bool value) {
-  _internal_set_left_hand_desired(value);
-  // @@protoc_insertion_point(field_set:CSGOUserCmdPB.left_hand_desired)
 }
 
 #ifdef __GNUC__

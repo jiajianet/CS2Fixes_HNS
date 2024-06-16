@@ -17,7 +17,7 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "usermessages.pb.h"
+#include "cstrike15_usermessages.pb.h"
 
 #include "commands.h"
 #include "utils/entity.h"
@@ -627,11 +627,6 @@ void CZRPlayerClassManager::ApplyBaseClass(ZRClass* pClass, CCSPlayerPawn *pPawn
 	// I shouldn't have to wonder why, but for whatever reason
 	// this shit caused crashes on ROUND END or MAP CHANGE after the 26/04/2024 update
 	//pPawn->m_flVelocityModifier = pClass->flSpeed;
-	const auto pController = reinterpret_cast<CCSPlayerController*>(pPawn->GetController());
-	if (const auto pPlayer = pController != nullptr ? pController->GetZEPlayer() : nullptr)
-	{
-		pPlayer->SetMaxSpeed(pClass->flSpeed);
-	}
 
 	// This has to be done a bit later
 	UTIL_AddEntityIOEvent(pPawn, "SetScale", nullptr, nullptr, pClass->flScale);
@@ -1080,8 +1075,13 @@ void ZR_OnRoundStart(IGameEvent* pEvent)
 	}
 }
 
-void ZR_OnPlayerSpawn(CCSPlayerController* pController)
+void ZR_OnPlayerSpawn(IGameEvent* pEvent)
 {
+	CCSPlayerController* pController = (CCSPlayerController*)pEvent->GetPlayerController("userid");
+
+	if (!pController)
+		return;
+
 	// delay infection a bit
 	bool bInfect = g_ZRRoundState == EZRRoundState::POST_INFECTION;
 
@@ -1161,17 +1161,9 @@ void ZR_FakePlayerDeath(CCSPlayerController *pAttackerController, CCSPlayerContr
 	pEvent->SetBool("infected", true);
 
 	g_gameEventManager->FireEvent(pEvent, false);
-
-
-
-	// it can sometimes be null when player joined on the very first round? 
-	if (!pItemServices)
-		return;
-
-	pPawn->DropMapWeapons();
-	pItemServices->StripPlayerWeapons(true);
-	pItemServices->GiveNamedItem("weapon_knife");
 }
+
+
 
 void ZR_Cure(CCSPlayerController *pTargetController)
 {
@@ -1214,21 +1206,18 @@ float ZR_MoanTimer(ZEPlayerHandle hPlayer)
 
 void ZR_InfectShake(CCSPlayerController *pController)
 {
-	if (!pController || !pController->IsConnected() || pController->IsBot() || !g_bInfectShake)
+	if (!pController || !pController->IsConnected() || pController->IsBot())
 		return;
 
-	INetworkMessageInternal *pNetMsg = g_pNetworkMessages->FindNetworkMessagePartial("Shake");
+	INetworkSerializable *pNetMsg = g_pNetworkMessages->FindNetworkMessagePartial("Shake");
 
-	auto data = pNetMsg->AllocateMessage()->ToPB<CUserMessageShake>();
+	CCSUsrMsg_Shake data;
+	data.set_duration(g_flInfectShakeDuration);
+	data.set_frequency(g_flInfectShakeFrequency);
+	data.set_local_amplitude(g_flInfectShakeAmplitude);
+	data.set_command(0);
 
-	data->set_duration(g_flInfectShakeDuration);
-	data->set_frequency(g_flInfectShakeFrequency);
-	data->set_amplitude(g_flInfectShakeAmplitude);
-	data->set_command(0);
-
-	pController->GetServerSideClient()->GetNetChannel()->SendNetMessage(pNetMsg, data, BUF_RELIABLE);
-
-	pNetMsg->DeallocateMessage(data);
+	pController->GetServerSideClient()->GetNetChannel()->SendNetMessage(pNetMsg, &data, BUF_RELIABLE);
 }
 
 std::vector<SpawnPoint*> ZR_GetSpawns()

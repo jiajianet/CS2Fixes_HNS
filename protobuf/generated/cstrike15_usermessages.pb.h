@@ -469,6 +469,7 @@ enum ECstrike15UserMessages : int {
   CS_UM_RoundEndReportData = 379,
   CS_UM_CurrentRoundOdds = 380,
   CS_UM_DeepStats = 381,
+  CS_UM_UtilMsg = 382,
   CS_UM_ShootInfo = 383
 };
 bool ECstrike15UserMessages_IsValid(int value);
@@ -515,7 +516,7 @@ inline bool ECSUsrMsg_DisconnectToLobby_Action_Parse(
 }
 // ===================================================================
 
-class CCSUsrMsg_VGUIMenu_Keys :
+class CCSUsrMsg_VGUIMenu_Keys final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_VGUIMenu.Keys) */ {
  public:
   inline CCSUsrMsg_VGUIMenu_Keys() : CCSUsrMsg_VGUIMenu_Keys(nullptr) {}
@@ -700,7 +701,7 @@ class CCSUsrMsg_VGUIMenu_Keys :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_VGUIMenu :
+class CCSUsrMsg_VGUIMenu final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_VGUIMenu) */ {
  public:
   inline CCSUsrMsg_VGUIMenu() : CCSUsrMsg_VGUIMenu(nullptr) {}
@@ -902,7 +903,7 @@ class CCSUsrMsg_VGUIMenu :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_Geiger :
+class CCSUsrMsg_Geiger final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_Geiger) */ {
  public:
   inline CCSUsrMsg_Geiger() : CCSUsrMsg_Geiger(nullptr) {}
@@ -1062,7 +1063,7 @@ class CCSUsrMsg_Geiger :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_Train :
+class CCSUsrMsg_Train final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_Train) */ {
  public:
   inline CCSUsrMsg_Train() : CCSUsrMsg_Train(nullptr) {}
@@ -1222,7 +1223,7 @@ class CCSUsrMsg_Train :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_HudText :
+class CCSUsrMsg_HudText final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_HudText) */ {
  public:
   inline CCSUsrMsg_HudText() : CCSUsrMsg_HudText(nullptr) {}
@@ -1387,7 +1388,7 @@ class CCSUsrMsg_HudText :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_HudMsg :
+class CCSUsrMsg_HudMsg final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_HudMsg) */ {
  public:
   inline CCSUsrMsg_HudMsg() : CCSUsrMsg_HudMsg(nullptr) {}
@@ -1702,7 +1703,7 @@ class CCSUsrMsg_HudMsg :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_Shake :
+class CCSUsrMsg_Shake final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_Shake) */ {
  public:
   inline CCSUsrMsg_Shake() : CCSUsrMsg_Shake(nullptr) {}
@@ -1907,7 +1908,7 @@ class CCSUsrMsg_Shake :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_Fade :
+class CCSUsrMsg_Fade final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_Fade) */ {
  public:
   inline CCSUsrMsg_Fade() : CCSUsrMsg_Fade(nullptr) {}
@@ -2117,7 +2118,7 @@ class CCSUsrMsg_Fade :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_Rumble :
+class CCSUsrMsg_Rumble final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_Rumble) */ {
  public:
   inline CCSUsrMsg_Rumble() : CCSUsrMsg_Rumble(nullptr) {}
@@ -2307,7 +2308,7 @@ class CCSUsrMsg_Rumble :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_CloseCaption :
+class CCSUsrMsg_CloseCaption final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_CloseCaption) */ {
  public:
   inline CCSUsrMsg_CloseCaption() : CCSUsrMsg_CloseCaption(nullptr) {}
@@ -2517,7 +2518,7 @@ class CCSUsrMsg_CloseCaption :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_CloseCaptionDirect :
+class CCSUsrMsg_CloseCaptionDirect final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_CloseCaptionDirect) */ {
  public:
   inline CCSUsrMsg_CloseCaptionDirect() : CCSUsrMsg_CloseCaptionDirect(nullptr) {}
@@ -2707,7 +2708,7 @@ class CCSUsrMsg_CloseCaptionDirect :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_SendAudio :
+class CCSUsrMsg_SendAudio final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_SendAudio) */ {
  public:
   inline CCSUsrMsg_SendAudio() : CCSUsrMsg_SendAudio(nullptr) {}
@@ -2872,7 +2873,7 @@ class CCSUsrMsg_SendAudio :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_RawAudio :
+class CCSUsrMsg_RawAudio final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_RawAudio) */ {
  public:
   inline CCSUsrMsg_RawAudio() : CCSUsrMsg_RawAudio(nullptr) {}
@@ -3082,7 +3083,7 @@ class CCSUsrMsg_RawAudio :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_VoiceMask_PlayerMask :
+class CCSUsrMsg_VoiceMask_PlayerMask final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_VoiceMask.PlayerMask) */ {
  public:
   inline CCSUsrMsg_VoiceMask_PlayerMask() : CCSUsrMsg_VoiceMask_PlayerMask(nullptr) {}
@@ -3257,7 +3258,7 @@ class CCSUsrMsg_VoiceMask_PlayerMask :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_VoiceMask :
+class CCSUsrMsg_VoiceMask final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_VoiceMask) */ {
  public:
   inline CCSUsrMsg_VoiceMask() : CCSUsrMsg_VoiceMask(nullptr) {}
@@ -3439,7 +3440,7 @@ class CCSUsrMsg_VoiceMask :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_Damage :
+class CCSUsrMsg_Damage final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_Damage) */ {
  public:
   inline CCSUsrMsg_Damage() : CCSUsrMsg_Damage(nullptr) {}
@@ -3634,7 +3635,7 @@ class CCSUsrMsg_Damage :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_RadioText :
+class CCSUsrMsg_RadioText final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_RadioText) */ {
  public:
   inline CCSUsrMsg_RadioText() : CCSUsrMsg_RadioText(nullptr) {}
@@ -3855,7 +3856,7 @@ class CCSUsrMsg_RadioText :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_HintText :
+class CCSUsrMsg_HintText final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_HintText) */ {
  public:
   inline CCSUsrMsg_HintText() : CCSUsrMsg_HintText(nullptr) {}
@@ -4020,7 +4021,7 @@ class CCSUsrMsg_HintText :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_KeyHintText :
+class CCSUsrMsg_KeyHintText final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_KeyHintText) */ {
  public:
   inline CCSUsrMsg_KeyHintText() : CCSUsrMsg_KeyHintText(nullptr) {}
@@ -4190,7 +4191,7 @@ class CCSUsrMsg_KeyHintText :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ProcessSpottedEntityUpdate_SpottedEntityUpdate :
+class CCSUsrMsg_ProcessSpottedEntityUpdate_SpottedEntityUpdate final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ProcessSpottedEntityUpdate.SpottedEntityUpdate) */ {
  public:
   inline CCSUsrMsg_ProcessSpottedEntityUpdate_SpottedEntityUpdate() : CCSUsrMsg_ProcessSpottedEntityUpdate_SpottedEntityUpdate(nullptr) {}
@@ -4470,7 +4471,7 @@ class CCSUsrMsg_ProcessSpottedEntityUpdate_SpottedEntityUpdate :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ProcessSpottedEntityUpdate :
+class CCSUsrMsg_ProcessSpottedEntityUpdate final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ProcessSpottedEntityUpdate) */ {
  public:
   inline CCSUsrMsg_ProcessSpottedEntityUpdate() : CCSUsrMsg_ProcessSpottedEntityUpdate(nullptr) {}
@@ -4652,7 +4653,7 @@ class CCSUsrMsg_ProcessSpottedEntityUpdate :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_SendPlayerItemDrops :
+class CCSUsrMsg_SendPlayerItemDrops final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_SendPlayerItemDrops) */ {
  public:
   inline CCSUsrMsg_SendPlayerItemDrops() : CCSUsrMsg_SendPlayerItemDrops(nullptr) {}
@@ -4816,7 +4817,7 @@ class CCSUsrMsg_SendPlayerItemDrops :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_SendPlayerItemFound :
+class CCSUsrMsg_SendPlayerItemFound final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_SendPlayerItemFound) */ {
  public:
   inline CCSUsrMsg_SendPlayerItemFound() : CCSUsrMsg_SendPlayerItemFound(nullptr) {}
@@ -4996,7 +4997,7 @@ class CCSUsrMsg_SendPlayerItemFound :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ReloadEffect :
+class CCSUsrMsg_ReloadEffect final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ReloadEffect) */ {
  public:
   inline CCSUsrMsg_ReloadEffect() : CCSUsrMsg_ReloadEffect(nullptr) {}
@@ -5216,7 +5217,7 @@ class CCSUsrMsg_ReloadEffect :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_WeaponSound :
+class CCSUsrMsg_WeaponSound final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_WeaponSound) */ {
  public:
   inline CCSUsrMsg_WeaponSound() : CCSUsrMsg_WeaponSound(nullptr) {}
@@ -5471,7 +5472,7 @@ class CCSUsrMsg_WeaponSound :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_UpdateScreenHealthBar :
+class CCSUsrMsg_UpdateScreenHealthBar final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_UpdateScreenHealthBar) */ {
  public:
   inline CCSUsrMsg_UpdateScreenHealthBar() : CCSUsrMsg_UpdateScreenHealthBar(nullptr) {}
@@ -5676,7 +5677,7 @@ class CCSUsrMsg_UpdateScreenHealthBar :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_EntityOutlineHighlight :
+class CCSUsrMsg_EntityOutlineHighlight final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_EntityOutlineHighlight) */ {
  public:
   inline CCSUsrMsg_EntityOutlineHighlight() : CCSUsrMsg_EntityOutlineHighlight(nullptr) {}
@@ -5851,7 +5852,7 @@ class CCSUsrMsg_EntityOutlineHighlight :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_AdjustMoney :
+class CCSUsrMsg_AdjustMoney final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_AdjustMoney) */ {
  public:
   inline CCSUsrMsg_AdjustMoney() : CCSUsrMsg_AdjustMoney(nullptr) {}
@@ -6011,7 +6012,7 @@ class CCSUsrMsg_AdjustMoney :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ReportHit :
+class CCSUsrMsg_ReportHit final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ReportHit) */ {
  public:
   inline CCSUsrMsg_ReportHit() : CCSUsrMsg_ReportHit(nullptr) {}
@@ -6216,7 +6217,7 @@ class CCSUsrMsg_ReportHit :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_KillCam :
+class CCSUsrMsg_KillCam final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_KillCam) */ {
  public:
   inline CCSUsrMsg_KillCam() : CCSUsrMsg_KillCam(nullptr) {}
@@ -6406,7 +6407,7 @@ class CCSUsrMsg_KillCam :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_DesiredTimescale :
+class CCSUsrMsg_DesiredTimescale final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_DesiredTimescale) */ {
  public:
   inline CCSUsrMsg_DesiredTimescale() : CCSUsrMsg_DesiredTimescale(nullptr) {}
@@ -6611,7 +6612,7 @@ class CCSUsrMsg_DesiredTimescale :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_CurrentTimescale :
+class CCSUsrMsg_CurrentTimescale final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_CurrentTimescale) */ {
  public:
   inline CCSUsrMsg_CurrentTimescale() : CCSUsrMsg_CurrentTimescale(nullptr) {}
@@ -6771,7 +6772,7 @@ class CCSUsrMsg_CurrentTimescale :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_AchievementEvent :
+class CCSUsrMsg_AchievementEvent final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_AchievementEvent) */ {
  public:
   inline CCSUsrMsg_AchievementEvent() : CCSUsrMsg_AchievementEvent(nullptr) {}
@@ -6961,7 +6962,7 @@ class CCSUsrMsg_AchievementEvent :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_MatchEndConditions :
+class CCSUsrMsg_MatchEndConditions final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_MatchEndConditions) */ {
  public:
   inline CCSUsrMsg_MatchEndConditions() : CCSUsrMsg_MatchEndConditions(nullptr) {}
@@ -7166,7 +7167,7 @@ class CCSUsrMsg_MatchEndConditions :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_PlayerStatsUpdate_Stat :
+class CCSUsrMsg_PlayerStatsUpdate_Stat final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_PlayerStatsUpdate.Stat) */ {
  public:
   inline CCSUsrMsg_PlayerStatsUpdate_Stat() : CCSUsrMsg_PlayerStatsUpdate_Stat(nullptr) {}
@@ -7341,7 +7342,7 @@ class CCSUsrMsg_PlayerStatsUpdate_Stat :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_PlayerStatsUpdate :
+class CCSUsrMsg_PlayerStatsUpdate final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_PlayerStatsUpdate) */ {
  public:
   inline CCSUsrMsg_PlayerStatsUpdate() : CCSUsrMsg_PlayerStatsUpdate(nullptr) {}
@@ -7553,7 +7554,7 @@ class CCSUsrMsg_PlayerStatsUpdate :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_QuestProgress :
+class CCSUsrMsg_QuestProgress final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_QuestProgress) */ {
  public:
   inline CCSUsrMsg_QuestProgress() : CCSUsrMsg_QuestProgress(nullptr) {}
@@ -7758,7 +7759,7 @@ class CCSUsrMsg_QuestProgress :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ScoreLeaderboardData :
+class CCSUsrMsg_ScoreLeaderboardData final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ScoreLeaderboardData) */ {
  public:
   inline CCSUsrMsg_ScoreLeaderboardData() : CCSUsrMsg_ScoreLeaderboardData(nullptr) {}
@@ -7923,7 +7924,7 @@ class CCSUsrMsg_ScoreLeaderboardData :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_PlayerDecalDigitalSignature :
+class CCSUsrMsg_PlayerDecalDigitalSignature final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_PlayerDecalDigitalSignature) */ {
  public:
   inline CCSUsrMsg_PlayerDecalDigitalSignature() : CCSUsrMsg_PlayerDecalDigitalSignature(nullptr) {}
@@ -8088,7 +8089,7 @@ class CCSUsrMsg_PlayerDecalDigitalSignature :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_XRankGet :
+class CCSUsrMsg_XRankGet final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_XRankGet) */ {
  public:
   inline CCSUsrMsg_XRankGet() : CCSUsrMsg_XRankGet(nullptr) {}
@@ -8263,7 +8264,7 @@ class CCSUsrMsg_XRankGet :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_XRankUpd :
+class CCSUsrMsg_XRankUpd final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_XRankUpd) */ {
  public:
   inline CCSUsrMsg_XRankUpd() : CCSUsrMsg_XRankUpd(nullptr) {}
@@ -8453,7 +8454,7 @@ class CCSUsrMsg_XRankUpd :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_CallVoteFailed :
+class CCSUsrMsg_CallVoteFailed final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_CallVoteFailed) */ {
  public:
   inline CCSUsrMsg_CallVoteFailed() : CCSUsrMsg_CallVoteFailed(nullptr) {}
@@ -8628,7 +8629,7 @@ class CCSUsrMsg_CallVoteFailed :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_VoteStart :
+class CCSUsrMsg_VoteStart final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_VoteStart) */ {
  public:
   inline CCSUsrMsg_VoteStart() : CCSUsrMsg_VoteStart(nullptr) {}
@@ -8908,7 +8909,7 @@ class CCSUsrMsg_VoteStart :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_VotePass :
+class CCSUsrMsg_VotePass final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_VotePass) */ {
  public:
   inline CCSUsrMsg_VotePass() : CCSUsrMsg_VotePass(nullptr) {}
@@ -9123,7 +9124,7 @@ class CCSUsrMsg_VotePass :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_VoteFailed :
+class CCSUsrMsg_VoteFailed final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_VoteFailed) */ {
  public:
   inline CCSUsrMsg_VoteFailed() : CCSUsrMsg_VoteFailed(nullptr) {}
@@ -9298,7 +9299,7 @@ class CCSUsrMsg_VoteFailed :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_VoteSetup :
+class CCSUsrMsg_VoteSetup final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_VoteSetup) */ {
  public:
   inline CCSUsrMsg_VoteSetup() : CCSUsrMsg_VoteSetup(nullptr) {}
@@ -9468,7 +9469,7 @@ class CCSUsrMsg_VoteSetup :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_SendLastKillerDamageToClient :
+class CCSUsrMsg_SendLastKillerDamageToClient final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_SendLastKillerDamageToClient) */ {
  public:
   inline CCSUsrMsg_SendLastKillerDamageToClient() : CCSUsrMsg_SendLastKillerDamageToClient(nullptr) {}
@@ -9703,7 +9704,7 @@ class CCSUsrMsg_SendLastKillerDamageToClient :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ServerRankUpdate_RankUpdate :
+class CCSUsrMsg_ServerRankUpdate_RankUpdate final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ServerRankUpdate.RankUpdate) */ {
  public:
   inline CCSUsrMsg_ServerRankUpdate_RankUpdate() : CCSUsrMsg_ServerRankUpdate_RankUpdate(nullptr) {}
@@ -9938,7 +9939,7 @@ class CCSUsrMsg_ServerRankUpdate_RankUpdate :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ServerRankUpdate :
+class CCSUsrMsg_ServerRankUpdate final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ServerRankUpdate) */ {
  public:
   inline CCSUsrMsg_ServerRankUpdate() : CCSUsrMsg_ServerRankUpdate(nullptr) {}
@@ -10104,7 +10105,7 @@ class CCSUsrMsg_ServerRankUpdate :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_XpUpdate :
+class CCSUsrMsg_XpUpdate final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_XpUpdate) */ {
  public:
   inline CCSUsrMsg_XpUpdate() : CCSUsrMsg_XpUpdate(nullptr) {}
@@ -10269,7 +10270,7 @@ class CCSUsrMsg_XpUpdate :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ItemPickup :
+class CCSUsrMsg_ItemPickup final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ItemPickup) */ {
  public:
   inline CCSUsrMsg_ItemPickup() : CCSUsrMsg_ItemPickup(nullptr) {}
@@ -10434,7 +10435,7 @@ class CCSUsrMsg_ItemPickup :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ShowMenu :
+class CCSUsrMsg_ShowMenu final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ShowMenu) */ {
  public:
   inline CCSUsrMsg_ShowMenu() : CCSUsrMsg_ShowMenu(nullptr) {}
@@ -10629,7 +10630,7 @@ class CCSUsrMsg_ShowMenu :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_BarTime :
+class CCSUsrMsg_BarTime final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_BarTime) */ {
  public:
   inline CCSUsrMsg_BarTime() : CCSUsrMsg_BarTime(nullptr) {}
@@ -10794,7 +10795,7 @@ class CCSUsrMsg_BarTime :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_AmmoDenied :
+class CCSUsrMsg_AmmoDenied final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_AmmoDenied) */ {
  public:
   inline CCSUsrMsg_AmmoDenied() : CCSUsrMsg_AmmoDenied(nullptr) {}
@@ -10954,7 +10955,7 @@ class CCSUsrMsg_AmmoDenied :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_MarkAchievement :
+class CCSUsrMsg_MarkAchievement final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_MarkAchievement) */ {
  public:
   inline CCSUsrMsg_MarkAchievement() : CCSUsrMsg_MarkAchievement(nullptr) {}
@@ -11119,7 +11120,7 @@ class CCSUsrMsg_MarkAchievement :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_MatchStatsUpdate :
+class CCSUsrMsg_MatchStatsUpdate final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_MatchStatsUpdate) */ {
  public:
   inline CCSUsrMsg_MatchStatsUpdate() : CCSUsrMsg_MatchStatsUpdate(nullptr) {}
@@ -11284,7 +11285,7 @@ class CCSUsrMsg_MatchStatsUpdate :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ItemDrop :
+class CCSUsrMsg_ItemDrop final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ItemDrop) */ {
  public:
   inline CCSUsrMsg_ItemDrop() : CCSUsrMsg_ItemDrop(nullptr) {}
@@ -11459,7 +11460,7 @@ class CCSUsrMsg_ItemDrop :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_GlowPropTurnOff :
+class CCSUsrMsg_GlowPropTurnOff final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_GlowPropTurnOff) */ {
  public:
   inline CCSUsrMsg_GlowPropTurnOff() : CCSUsrMsg_GlowPropTurnOff(nullptr) {}
@@ -11619,7 +11620,7 @@ class CCSUsrMsg_GlowPropTurnOff :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_RoundBackupFilenames :
+class CCSUsrMsg_RoundBackupFilenames final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_RoundBackupFilenames) */ {
  public:
   inline CCSUsrMsg_RoundBackupFilenames() : CCSUsrMsg_RoundBackupFilenames(nullptr) {}
@@ -11834,7 +11835,7 @@ class CCSUsrMsg_RoundBackupFilenames :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_SSUI :
+class CCSUsrMsg_SSUI final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_SSUI) */ {
  public:
   inline CCSUsrMsg_SSUI() : CCSUsrMsg_SSUI(nullptr) {}
@@ -12024,7 +12025,7 @@ class CCSUsrMsg_SSUI :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_SurvivalStats_Fact :
+class CCSUsrMsg_SurvivalStats_Fact final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_SurvivalStats.Fact) */ {
  public:
   inline CCSUsrMsg_SurvivalStats_Fact() : CCSUsrMsg_SurvivalStats_Fact(nullptr) {}
@@ -12229,7 +12230,7 @@ class CCSUsrMsg_SurvivalStats_Fact :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_SurvivalStats_Placement :
+class CCSUsrMsg_SurvivalStats_Placement final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_SurvivalStats.Placement) */ {
  public:
   inline CCSUsrMsg_SurvivalStats_Placement() : CCSUsrMsg_SurvivalStats_Placement(nullptr) {}
@@ -12419,7 +12420,7 @@ class CCSUsrMsg_SurvivalStats_Placement :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_SurvivalStats_Damage :
+class CCSUsrMsg_SurvivalStats_Damage final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_SurvivalStats.Damage) */ {
  public:
   inline CCSUsrMsg_SurvivalStats_Damage() : CCSUsrMsg_SurvivalStats_Damage(nullptr) {}
@@ -12639,7 +12640,7 @@ class CCSUsrMsg_SurvivalStats_Damage :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_SurvivalStats :
+class CCSUsrMsg_SurvivalStats final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_SurvivalStats) */ {
  public:
   inline CCSUsrMsg_SurvivalStats() : CCSUsrMsg_SurvivalStats(nullptr) {}
@@ -12878,7 +12879,7 @@ class CCSUsrMsg_SurvivalStats :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_EndOfMatchAllPlayersData_Accolade :
+class CCSUsrMsg_EndOfMatchAllPlayersData_Accolade final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_EndOfMatchAllPlayersData.Accolade) */ {
  public:
   inline CCSUsrMsg_EndOfMatchAllPlayersData_Accolade() : CCSUsrMsg_EndOfMatchAllPlayersData_Accolade(nullptr) {}
@@ -13068,7 +13069,7 @@ class CCSUsrMsg_EndOfMatchAllPlayersData_Accolade :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_EndOfMatchAllPlayersData_PlayerData :
+class CCSUsrMsg_EndOfMatchAllPlayersData_PlayerData final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_EndOfMatchAllPlayersData.PlayerData) */ {
  public:
   inline CCSUsrMsg_EndOfMatchAllPlayersData_PlayerData() : CCSUsrMsg_EndOfMatchAllPlayersData_PlayerData(nullptr) {}
@@ -13348,7 +13349,7 @@ class CCSUsrMsg_EndOfMatchAllPlayersData_PlayerData :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_EndOfMatchAllPlayersData :
+class CCSUsrMsg_EndOfMatchAllPlayersData final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_EndOfMatchAllPlayersData) */ {
  public:
   inline CCSUsrMsg_EndOfMatchAllPlayersData() : CCSUsrMsg_EndOfMatchAllPlayersData(nullptr) {}
@@ -13531,7 +13532,7 @@ class CCSUsrMsg_EndOfMatchAllPlayersData :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_RoundEndReportData_RerEvent_Victim :
+class CCSUsrMsg_RoundEndReportData_RerEvent_Victim final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_RoundEndReportData.RerEvent.Victim) */ {
  public:
   inline CCSUsrMsg_RoundEndReportData_RerEvent_Victim() : CCSUsrMsg_RoundEndReportData_RerEvent_Victim(nullptr) {}
@@ -13766,7 +13767,7 @@ class CCSUsrMsg_RoundEndReportData_RerEvent_Victim :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_RoundEndReportData_RerEvent_Objective :
+class CCSUsrMsg_RoundEndReportData_RerEvent_Objective final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_RoundEndReportData.RerEvent.Objective) */ {
  public:
   inline CCSUsrMsg_RoundEndReportData_RerEvent_Objective() : CCSUsrMsg_RoundEndReportData_RerEvent_Objective(nullptr) {}
@@ -13926,7 +13927,7 @@ class CCSUsrMsg_RoundEndReportData_RerEvent_Objective :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_RoundEndReportData_RerEvent_Damage :
+class CCSUsrMsg_RoundEndReportData_RerEvent_Damage final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_RoundEndReportData.RerEvent.Damage) */ {
  public:
   inline CCSUsrMsg_RoundEndReportData_RerEvent_Damage() : CCSUsrMsg_RoundEndReportData_RerEvent_Damage(nullptr) {}
@@ -14161,7 +14162,7 @@ class CCSUsrMsg_RoundEndReportData_RerEvent_Damage :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_RoundEndReportData_RerEvent :
+class CCSUsrMsg_RoundEndReportData_RerEvent final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_RoundEndReportData.RerEvent) */ {
  public:
   inline CCSUsrMsg_RoundEndReportData_RerEvent() : CCSUsrMsg_RoundEndReportData_RerEvent(nullptr) {}
@@ -14430,7 +14431,7 @@ class CCSUsrMsg_RoundEndReportData_RerEvent :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_RoundEndReportData_InitialConditions :
+class CCSUsrMsg_RoundEndReportData_InitialConditions final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_RoundEndReportData.InitialConditions) */ {
  public:
   inline CCSUsrMsg_RoundEndReportData_InitialConditions() : CCSUsrMsg_RoundEndReportData_InitialConditions(nullptr) {}
@@ -14620,7 +14621,7 @@ class CCSUsrMsg_RoundEndReportData_InitialConditions :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_RoundEndReportData :
+class CCSUsrMsg_RoundEndReportData final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_RoundEndReportData) */ {
  public:
   inline CCSUsrMsg_RoundEndReportData() : CCSUsrMsg_RoundEndReportData(nullptr) {}
@@ -14808,7 +14809,7 @@ class CCSUsrMsg_RoundEndReportData :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_PostRoundDamageReport :
+class CCSUsrMsg_PostRoundDamageReport final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_PostRoundDamageReport) */ {
  public:
   inline CCSUsrMsg_PostRoundDamageReport() : CCSUsrMsg_PostRoundDamageReport(nullptr) {}
@@ -15058,7 +15059,7 @@ class CCSUsrMsg_PostRoundDamageReport :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_CurrentRoundOdds :
+class CCSUsrMsg_CurrentRoundOdds final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_CurrentRoundOdds) */ {
  public:
   inline CCSUsrMsg_CurrentRoundOdds() : CCSUsrMsg_CurrentRoundOdds(nullptr) {}
@@ -15218,7 +15219,7 @@ class CCSUsrMsg_CurrentRoundOdds :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_DeepStats :
+class CCSUsrMsg_DeepStats final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_DeepStats) */ {
  public:
   inline CCSUsrMsg_DeepStats() : CCSUsrMsg_DeepStats(nullptr) {}
@@ -15383,7 +15384,7 @@ class CCSUsrMsg_DeepStats :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ShootInfo :
+class CCSUsrMsg_ShootInfo final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ShootInfo) */ {
  public:
   inline CCSUsrMsg_ShootInfo() : CCSUsrMsg_ShootInfo(nullptr) {}
@@ -15603,7 +15604,7 @@ class CCSUsrMsg_ShootInfo :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ResetHud :
+class CCSUsrMsg_ResetHud final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ResetHud) */ {
  public:
   inline CCSUsrMsg_ResetHud() : CCSUsrMsg_ResetHud(nullptr) {}
@@ -15763,7 +15764,7 @@ class CCSUsrMsg_ResetHud :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_GameTitle :
+class CCSUsrMsg_GameTitle final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_GameTitle) */ {
  public:
   inline CCSUsrMsg_GameTitle() : CCSUsrMsg_GameTitle(nullptr) {}
@@ -15923,7 +15924,7 @@ class CCSUsrMsg_GameTitle :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_RequestState :
+class CCSUsrMsg_RequestState final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_RequestState) */ {
  public:
   inline CCSUsrMsg_RequestState() : CCSUsrMsg_RequestState(nullptr) {}
@@ -16083,7 +16084,7 @@ class CCSUsrMsg_RequestState :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_StopSpectatorMode :
+class CCSUsrMsg_StopSpectatorMode final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_StopSpectatorMode) */ {
  public:
   inline CCSUsrMsg_StopSpectatorMode() : CCSUsrMsg_StopSpectatorMode(nullptr) {}
@@ -16243,7 +16244,7 @@ class CCSUsrMsg_StopSpectatorMode :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_DisconnectToLobby :
+class CCSUsrMsg_DisconnectToLobby final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_DisconnectToLobby) */ {
  public:
   inline CCSUsrMsg_DisconnectToLobby() : CCSUsrMsg_DisconnectToLobby(nullptr) {}
@@ -16403,7 +16404,7 @@ class CCSUsrMsg_DisconnectToLobby :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_WarmupHasEnded :
+class CCSUsrMsg_WarmupHasEnded final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_WarmupHasEnded) */ {
  public:
   inline CCSUsrMsg_WarmupHasEnded() : CCSUsrMsg_WarmupHasEnded(nullptr) {}
@@ -16563,7 +16564,7 @@ class CCSUsrMsg_WarmupHasEnded :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ClientInfo :
+class CCSUsrMsg_ClientInfo final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ClientInfo) */ {
  public:
   inline CCSUsrMsg_ClientInfo() : CCSUsrMsg_ClientInfo(nullptr) {}
@@ -16723,7 +16724,7 @@ class CCSUsrMsg_ClientInfo :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsg_ServerRankRevealAll :
+class CCSUsrMsg_ServerRankRevealAll final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsg_ServerRankRevealAll) */ {
  public:
   inline CCSUsrMsg_ServerRankRevealAll() : CCSUsrMsg_ServerRankRevealAll(nullptr) {}
@@ -16903,7 +16904,7 @@ class CCSUsrMsg_ServerRankRevealAll :
 };
 // -------------------------------------------------------------------
 
-class CCSUsrMsgPreMatchSayText :
+class CCSUsrMsgPreMatchSayText final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CCSUsrMsgPreMatchSayText) */ {
  public:
   inline CCSUsrMsgPreMatchSayText() : CCSUsrMsgPreMatchSayText(nullptr) {}

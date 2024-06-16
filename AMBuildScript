@@ -157,11 +157,7 @@ class MMSPluginConfig(object):
         '-fPIC',
       ]
 
-      if cxx.family == 'clang':
-        cxx.cxxflags += ['-std=c++20']
-      elif cxx.family == 'gcc':
-        cxx.cxxflags += ['-std=c++2a']
-
+      cxx.cxxflags += ['-std=c++17']
       if (builder.options.asan != '1') and ((cxx.version >= 'gcc-4.0') or cxx.family == 'clang'):
         cxx.cflags += ['-fvisibility=hidden']
         cxx.cxxflags += ['-fvisibility-inlines-hidden']
@@ -219,7 +215,7 @@ class MMSPluginConfig(object):
       cxx.cflags += [
         '/W3',
         '/Zi',
-        '/std:c++20',
+        '/std:c++17',
       ]
       cxx.cxxflags += ['/TP']
       
